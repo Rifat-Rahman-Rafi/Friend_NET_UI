@@ -1,0 +1,126 @@
+.AuthContainer {
+    background-color: #f0f2f5;
+  }
+  
+  .AuthContainer .ctn {
+    width: auto;
+    height: fit-content;
+    height: 700px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f2f5;
+    
+  
+    @media (max-height: 667px) {
+      padding-bottom: 20px;
+      background-color: #f0f2f5;
+    }
+  
+    @media (max-width: 750px) {
+      grid-template-columns: 1fr;
+    }
+  
+    .h4 {
+      justify-content: center;
+      font-size: 27px;
+      font-weight: lighter;
+      width: 58%;
+  
+      @media (max-width: 750px) {
+        font-size: 18px;
+        width: 80%;
+        
+      }
+    }
+  
+    .left {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  
+      .h4 {
+       
+        margin-left: 36px;
+      }
+    }
+  
+    .logo {
+      width: 400px;
+      border-radius: 8px;
+  
+      @media (max-width: 750px) {
+        width: 90%;
+      }
+    }
+  
+    .auth {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+  
+      .auth2 {
+        padding: 18px;
+        border-radius: 10px;
+        width: fit-content;
+        box-shadow: 1px 1px 10px rgba(80, 80, 230, 0.288);
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+  
+        @media (max-width: 750px) {
+          width: 80%;
+        }
+      }
+  
+      .form {
+        display: flex;
+        flex-direction: column;
+  
+        .i1,
+        .i2 {
+          width: 50%;
+        }
+      }
+    }
+  }
+  
+  .loginBtn {
+    width: 100%;
+    border-radius: 10px;
+    background-color: #1877f2;
+  }
+  
+  .signIn {
+    border-radius: 10px;
+    background-color: #42b72a;
+  }
+  
+  .border {
+    height: 1.2px;
+    width: 100%;
+    margin-top: 30px;
+    background-color: gray;
+  }
+  
+  .button {
+    padding: 10px;
+    text-align: center;
+    background-color: blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 10px;
+  }
+
+
+
+  
