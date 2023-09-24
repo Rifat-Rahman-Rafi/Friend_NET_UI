@@ -51,10 +51,7 @@ const Nfeed = ({
 
  // const[updateImg,setUpdateImg]=useState(selectedFile);
 
-  const[updateImg,setUpdateImg]=useState({
-    selectedFile: "",
-   
-  });
+  const[updateImg,setUpdateImg]=useState(selectedFile);
 
 
 
@@ -80,11 +77,12 @@ const Nfeed = ({
 
   const showmessageFunc = () => {
     setShowmessage((e) => !e)
-    setTitle("")
+    setTitle("");
+    
   }
 
   const edit = () => {
-    dispatch(updatepost({ title, postid: _id, updateImg }));
+    dispatch(updatepost({ title, postid: _id, updateImg: updateImg.selectedFile }));
     setShowmessage((e) => !e);
     setTitle("");
     // Reset the updateImg state if needed
@@ -97,9 +95,6 @@ const Nfeed = ({
     setComment("")
   };
 
-
-
-  
 
 
   const commenthandle = () => {
@@ -226,7 +221,7 @@ const Nfeed = ({
           />
 
 
-<PostImg></PostImg>
+{/* <PostImg></PostImg> */}
 
          
 
