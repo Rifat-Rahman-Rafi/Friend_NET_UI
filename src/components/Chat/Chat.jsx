@@ -630,6 +630,7 @@ import { Search, Send, PersonAdd } from '@mui/icons-material';
 import Img1 from '../../assets/img1.jpg';
 import tutorialsdev from '../../assets/tutorialsdev.png';
 import { io } from 'socket.io-client';
+import { useSelector } from 'react-redux';
 
 const Chat = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user:detail')));
@@ -753,7 +754,7 @@ const Chat = () => {
 
 
 
-
+  const { userinfo, userinfomessage } = useSelector((state) => state.userinfo);
 
 
 
@@ -827,8 +828,18 @@ const Chat = () => {
       >
         
         <div style={{ display: 'flex', alignItems: 'center', margin: '8px 14px' }}>
+
+        {/* {userinfo?.data?.userInfor?.profileImg ? (
+
+<Avatar onClick={handle} alt="Travis Howard" src={userinfo?.data?.userInfor?.profileImg} />
+) : (
+<div className="topbarImg">
+  <Avatar onClick={handle} alt="Travis Howard" src='https://i.ibb.co/Km16CJH/581-5813504-avatar-dummy-png-transparent-png.png' />
+ 
+</div>
+)} */}
           <Avatar
-            src={tutorialsdev}
+            src={userinfo?.data?.userInfor?.profileImg}
             sx={{ width: 75, height: 75, border: '2px solid #2196F3', borderRadius: '50%' }}
           />
           <div style={{ marginLeft: '8px' }}>

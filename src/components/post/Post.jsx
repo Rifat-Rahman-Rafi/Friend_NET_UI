@@ -323,7 +323,7 @@ const [isLiked, setIsLiked] = useState(post.likes?.includes(user?.result?._id));
   <div key={i} className="comment-item" style={{marginLeft:"10px"}}>
     <span className="comment-user">{val[0]}:</span>
     <span className="comment-text">{val[1]}</span>
-    {/* <Button onClick={commentDelete}>DELETE</Button> */}
+    <Button onClick={commentDelete}>DELETE</Button>
   </div>
 ))}
 
