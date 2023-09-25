@@ -624,13 +624,14 @@ import {
   Avatar,
   Divider,
   InputBase,
-  Button,
 } from '@mui/material';
+import {Button} from "react-bootstrap"
 import { Search, Send, PersonAdd } from '@mui/icons-material';
 import Img1 from '../../assets/img1.jpg';
 import tutorialsdev from '../../assets/tutorialsdev.png';
 import { io } from 'socket.io-client';
 import { useSelector } from 'react-redux';
+import Topbar from '../topbar/Topbar';
 
 const Chat = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user:detail')));
@@ -756,6 +757,15 @@ const Chat = () => {
 
   const { userinfo, userinfomessage } = useSelector((state) => state.userinfo);
 
+   
+
+  // console.log("CHATTTTTT",userinfo?.data?.userInfor?.name)
+
+
+  
+  const text = user?.firstName.charAt(0);
+
+  console.log("text",user.firstName);
 
 
   const [scrollPercentage, setScrollPercentage] = useState(0);
@@ -817,7 +827,10 @@ const Chat = () => {
   ));
 
   return (
-    <div style={{ display: 'flex', width: '100%' }}>
+   <div>
+
+    <Topbar></Topbar>
+     <div style={{ display: 'flex', width: '100%',marginTop:"70px" }}>
       <div
         style={{
           flex: '100%', // On mobile, take up the full width
@@ -838,10 +851,19 @@ const Chat = () => {
  
 </div>
 )} */}
-          <Avatar
+
+{userinfo?.data?.userInfor?.profileImg ? (
+
+           <Avatar
             src={userinfo?.data?.userInfor?.profileImg}
             sx={{ width: 75, height: 75, border: '2px solid #2196F3', borderRadius: '50%' }}
-          />
+          /> ):
+
+<Avatar sx={{ bgcolor: 'black', width: 75, height: 75 }}>{text}</Avatar>
+}
+
+
+
           <div style={{ marginLeft: '8px' }}>
             <Typography variant="h4">{user?.firstName}</Typography>
             <Typography variant="h6" style={{ fontWeight: 'lighter' }}>
@@ -1007,7 +1029,7 @@ const Chat = () => {
     >
       <Avatar
         src={Img1}
-        sx={{ width: 75, height: 75, border: '2px solid #2196F3', borderRadius: '50%' }}
+        sx={{ width: 60, height: 60, border: '2px solid #2196F3', borderRadius: '50%' }}
       />
       <div style={{ marginLeft: '8px', flex: '1' }}>
         <div style={{ marginLeft: 'auto', marginRight: '0' }}>
@@ -1180,6 +1202,7 @@ const Chat = () => {
         </div>
       </div>
     </div>
+   </div>
   );
 };
 
