@@ -63,7 +63,9 @@ export default function Topbar() {
         <div className="topbarLeft">
           <Link to="/home" style={{ textDecoration: 'none' }}>
             <img height='60px' src={"assets/icon.png"} alt="" />
+            
           </Link>
+         
         </div>
         <div className="topbarLeft2">
           <div className="searchbar">
