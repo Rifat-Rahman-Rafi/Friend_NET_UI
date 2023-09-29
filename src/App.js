@@ -19,6 +19,8 @@ import Dashboard from './modules/Dashboard';
 import Job from "./components/Jobs/Job";
 import FindJobs from "./components/FindJobs/FindJobs";
 import JobDetails from "./components/FindJobs/JobDetails";
+import MyJobTable from "./components/MyJobs/MyJobTable";
+import MyJob from "./components/MyJobs/MyJob";
 function App() {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -40,6 +42,8 @@ function App() {
         <Route path="/findjobs" element={<FindJobs></FindJobs>} />
 
         <Route path="/jobDetail/:id"element={<JobDetails/>} />
+
+        <Route path="/jobtable"element={<MyJob/>} />
 
         
 

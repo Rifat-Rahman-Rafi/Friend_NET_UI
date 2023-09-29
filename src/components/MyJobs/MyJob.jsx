@@ -19,7 +19,8 @@ import {
 } from '@mui/material';
 
 import Swal from 'sweetalert2/dist/sweetalert2.js';
-import 'sweetalert2/src/sweetalert2.scss';
+import 'sweetalert2/dist/sweetalert2.css';
+
 import { red } from '@mui/material/colors';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
@@ -33,7 +34,7 @@ const MyJob = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch('https://assignment-11-server-n-rifat-rahman-rafi.vercel.app/mytoys')
+    fetch('http://localhost:7070/mytoys')
       .then((res) => res.json())
       .then((data) => {
         setToys(data);
@@ -41,7 +42,10 @@ const MyJob = () => {
       });
   }, []);
 
-  const handleDeleteToy = (id) => {
+
+  console.log("MY TOOY", toys)
+
+  const handleDeleteToy = (_id) => {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -52,7 +56,7 @@ const MyJob = () => {
       confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://assignment-11-server-n-rifat-rahman-rafi.vercel.app/allToy/${id}`, {
+        fetch(`http://localhost:7070/allToy/${_id}`, {
           method: 'DELETE',
         })
           .then((res) => res.json())
@@ -60,7 +64,7 @@ const MyJob = () => {
             console.log(data);
             if (data.deletedCount > 0) {
               Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
-              const restToys = toys.filter((toy) => toy._id !== id);
+              const restToys = toys.filter((toy) => toy._id !== _id);
               setToys(restToys);
             }
           });
@@ -70,7 +74,7 @@ const MyJob = () => {
 
   const sortByAscending = () => {
     setLoading(true);
-    fetch(`https://assignment-11-server-n-rifat-rahman-rafi.vercel.app/mytoys/ascending?email=${user?.email}`)
+    fetch(`http://localhost:7070/mytoys/ascending?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setToys(data);
@@ -80,7 +84,7 @@ const MyJob = () => {
 
   const sortByDescending = () => {
     setLoading(true);
-    fetch(`https://assignment-11-server-n-rifat-rahman-rafi.vercel.app/mytoys/descending?email=${user?.email}`)
+    fetch(`http://localhost:7070/mytoys/descending?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setToys(data);
@@ -111,13 +115,13 @@ const MyJob = () => {
             <TableHead>
               <TableRow>
                 <TableCell></TableCell>
-                <TableCell>Toy Name</TableCell>
-                <TableCell>Seller Name / Email</TableCell>
-                <TableCell>Sub-category</TableCell>
-                <TableCell>Price</TableCell>
-                <TableCell>Rating</TableCell>
-                <TableCell>Available Quantity</TableCell>
-                <TableCell>Description</TableCell>
+                <TableCell>Job Title</TableCell>
+                <TableCell>Human Resources</TableCell>
+                <TableCell>Company Name</TableCell>
+                {/* <TableCell>Email</TableCell> */}
+                <TableCell>Salary</TableCell>
+                <TableCell>Employ Type</TableCell>
+            
                 <TableCell>Update button</TableCell>
                 <TableCell>Delete button</TableCell>
               </TableRow>
@@ -130,14 +134,17 @@ const MyJob = () => {
                   </TableCell>
                 </TableRow>
               ) : (
-                toys.map((toy, index) => (
+                toys.map((toys, index) => (
                   <MyJobTable
-                    key={toy._id}
-                    toy={toy}
+                    key={toys._id}
+                    toys={toys}
                     index={index + 1}
                     handleDeleteToy={handleDeleteToy}
                   />
                 ))
+                // toys.map((toys) => (
+                //     <MyJobTable key={toys._id} toys={toys} />
+                //   ))
               )}
             </TableBody>
           </Table>
