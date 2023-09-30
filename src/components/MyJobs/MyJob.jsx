@@ -34,7 +34,8 @@ const MyJob = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch('http://localhost:7070/mytoys')
+    const userEmail = user?.result?.email || ''; // Use the user's email if available
+  fetch(`http://localhost:7070/mytoys?email=${userEmail}`)
       .then((res) => res.json())
       .then((data) => {
         setToys(data);
@@ -43,7 +44,11 @@ const MyJob = () => {
   }, []);
 
 
-  console.log("MY TOOY", toys)
+//   console.log("MY TOYS",toys);
+//   toys.forEach((toy) => {
+//     console.log(toy.email);
+//   });
+  
 
   const handleDeleteToy = (_id) => {
     Swal.fire({
@@ -114,22 +119,22 @@ const MyJob = () => {
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell></TableCell>
-                <TableCell>Job Title</TableCell>
-                <TableCell>Human Resources</TableCell>
-                <TableCell>Company Name</TableCell>
+                {/* <TableCell></TableCell> */}
+                <TableCell align="center">Job Title</TableCell>
+                <TableCell align="center">Human Resources</TableCell>
+                <TableCell align="center">Company Name</TableCell>
                 {/* <TableCell>Email</TableCell> */}
-                <TableCell>Salary</TableCell>
-                <TableCell>Employ Type</TableCell>
+                <TableCell align="center">Salary</TableCell>
+                <TableCell align="center">Employ Type</TableCell>
             
-                <TableCell>Update button</TableCell>
-                <TableCell>Delete button</TableCell>
-              </TableRow>
+                <TableCell align="center">Update button</TableCell>
+                <TableCell align="center">Delete button</TableCell>
+              </TableRow> 
             </TableHead>
             <TableBody>
               {loading ? (
                 <TableRow>
-                  <TableCell colSpan={10} align="center">
+                  <TableCell  align="center">
                     <CircularProgress color="primary" />
                   </TableCell>
                 </TableRow>

@@ -27,7 +27,7 @@ const MyJobTable = ({ toys, handleDeleteToy }) => {
     const user = JSON.parse(localStorage.getItem("profile"));
 
     //  console.log("NNTTTTT",toys)
-    const { _id, sellerName, jobTitle, companyName, email, toy_name, salary,  employType, price, quantity, rating, description } = toys;
+    const { _id, sellerName, jobTitle, companyName, email,  salary,  employType, price, quantity,  description } = toys;
     const [openDialog, setOpenDialog] = useState(false);
     const [priceInput, setPriceInput] = useState(price);
     const [quantityInput, setQuantityInput] = useState(quantity);
@@ -76,32 +76,32 @@ const MyJobTable = ({ toys, handleDeleteToy }) => {
         });
     };
     return (
-        <TableRow>
+        <TableRow >
       {/* <TableCell>
         <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
           {toy_name.charAt(0)}
         </Avatar>
       </TableCell> */}
-      <TableCell>
+      <TableCell  align="center">
         <Typography variant="body1" fontWeight="bold">
           {jobTitle}
         </Typography>
       </TableCell>
-      <TableCell>
-        <Typography variant="body1" fontWeight="bold">
+      <TableCell align="center">
+        <Typography align="center" variant="body1" fontWeight="bold">
           {sellerName}
         </Typography>
-        <Typography variant="body2" color="textSecondary">
+        <Typography align="center" variant="body2" color="textSecondary">
           {email}
         </Typography>
       </TableCell>
-      <TableCell>{employType}</TableCell>
-      <TableCell>${salary}</TableCell>
-      <TableCell>{rating}</TableCell>
-      <TableCell>{quantity}</TableCell>
-      <TableCell>{description}</TableCell>
-      <TableCell>
-        <IconButton color="primary" aria-label="edit" onClick={handleOpenDialog}>
+      <TableCell align="center">{companyName}</TableCell>
+      <TableCell align="center">${salary}</TableCell>
+      <TableCell align="center">{employType}</TableCell>
+      {/* <TableCell>{quantity}</TableCell>
+      <TableCell>{description}</TableCell> */}
+      <TableCell align="center">
+        <IconButton  color="primary" aria-label="edit" onClick={handleOpenDialog}>
           <EditIcon />
         </IconButton>
         <Dialog open={openDialog} onClose={handleCloseDialog} fullWidth maxWidth="sm">
@@ -142,7 +142,7 @@ const MyJobTable = ({ toys, handleDeleteToy }) => {
           </DialogActions>
         </Dialog>
       </TableCell>
-      <TableCell>
+      <TableCell align="center">
         <IconButton color="error" aria-label="delete" onClick={() => handleDeleteToy(_id)}>
           <DeleteIcon />
         </IconButton>

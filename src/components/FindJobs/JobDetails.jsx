@@ -160,6 +160,9 @@ const JobDetails = () => {
           >
             Previous
           </Button>
+
+          {/* <a href={jobDetails?.email} class="btn" target="_blank">Apply Now</a> */}
+
         </Box>
       </Card>
     </div>
