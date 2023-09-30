@@ -21,6 +21,7 @@ import FindJobs from "./components/FindJobs/FindJobs";
 import JobDetails from "./components/FindJobs/JobDetails";
 import MyJobTable from "./components/MyJobs/MyJobTable";
 import MyJob from "./components/MyJobs/MyJob";
+import ComingSoon from "./components/ComingSoon/ComingSoon";
 function App() {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -44,6 +45,7 @@ function App() {
         <Route path="/jobDetail/:id"element={<JobDetails/>} />
 
         <Route path="/jobtable"element={<MyJob/>} />
+        <Route path="/comingsoon"element={<ComingSoon/>} />
 
         
 

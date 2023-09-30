@@ -27,17 +27,17 @@ const MyJobTable = ({ toys, handleDeleteToy }) => {
     const user = JSON.parse(localStorage.getItem("profile"));
 
     //  console.log("NNTTTTT",toys)
-    const { _id, sellerName, jobTitle, companyName, email,  salary,  employType, price, quantity,  description } = toys;
+    const { _id, sellerName, jobTitle, companyName, email,  salary,  employType } = toys;
     const [openDialog, setOpenDialog] = useState(false);
-    const [priceInput, setPriceInput] = useState(price);
-    const [quantityInput, setQuantityInput] = useState(quantity);
-    const [descriptionInput, setDescriptionInput] = useState(description);
+    const [priceInput, setPriceInput] = useState(salary);
+    const [employTypeInput, setEmployTypeInput] = useState(employType);
+    const [jobTitleInput, setJobTitleInput] = useState(jobTitle);
     const [loading, setLoading] = useState(false);
   
     const handleOpenDialog = () => {
-      setPriceInput(price);
-      setQuantityInput(quantity);
-      setDescriptionInput(description);
+      setPriceInput(salary);
+      setEmployTypeInput(employType);
+      setJobTitleInput(jobTitle);
       setOpenDialog(true);
     };
   
@@ -49,9 +49,9 @@ const MyJobTable = ({ toys, handleDeleteToy }) => {
       setLoading(true);
   
       const updateToysInfo = {
-        price: priceInput,
-        quantity: quantityInput,
-        description: descriptionInput,
+        salary: priceInput,
+        employType: employTypeInput,
+        jobTitle: jobTitleInput,
       };
   
       fetch(`http://localhost:7070/allToy/details/${_id}`, {
@@ -63,7 +63,7 @@ const MyJobTable = ({ toys, handleDeleteToy }) => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          console.log("UPDATED",data);
           setLoading(false);
           setOpenDialog(false);
           if (data.modifiedCount > 0) {
@@ -105,7 +105,7 @@ const MyJobTable = ({ toys, handleDeleteToy }) => {
           <EditIcon />
         </IconButton>
         <Dialog open={openDialog} onClose={handleCloseDialog} fullWidth maxWidth="sm">
-          <DialogTitle>Update Toy Information</DialogTitle>
+          <DialogTitle>Update Job Information</DialogTitle>
           <DialogContent>
             <TextField
               label="Price"
@@ -118,8 +118,8 @@ const MyJobTable = ({ toys, handleDeleteToy }) => {
               label="Available Quantity"
               fullWidth
               variant="outlined"
-              value={quantityInput}
-              onChange={(e) => setQuantityInput(e.target.value)}
+              value={employTypeInput}
+              onChange={(e) => setEmployTypeInput(e.target.value)}
             />
             <TextField
               label="Description"
@@ -127,8 +127,8 @@ const MyJobTable = ({ toys, handleDeleteToy }) => {
               multiline
               rows={4}
               variant="outlined"
-              value={descriptionInput}
-              onChange={(e) => setDescriptionInput(e.target.value)}
+              value={jobTitleInput}
+              onChange={(e) => setJobTitleInput(e.target.value)}
             />
           </DialogContent>
           <DialogActions>

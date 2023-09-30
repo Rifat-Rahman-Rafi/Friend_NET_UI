@@ -16,6 +16,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import WorkIcon from '@mui/icons-material/Work';
 import { Search } from '@mui/icons-material';
+import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 export default function Sidebar() {
   //to hide/show certain elements
   const [showHidden,setShowHidden] = useState()
@@ -75,8 +76,18 @@ export default function Sidebar() {
 </Link>
 
 
+<Link to="/jobtable" style={{ textDecoration: 'none' }}>
+  <li className="sidebarListItem">
+    <WorkOutlineIcon className="sidebarIcon" style={{ color: 'skyblue' }} />
+    <span className="sidebarListItemText">My Jobs</span>
+  </li>
+</Link>
 
-                <Link to="/job" style={{ textDecoration: 'none' }}>
+
+
+
+
+                <Link to="/comingsoon" style={{ textDecoration: 'none' }}>
   <li className="sidebarListItem">
     <RssFeed className="sidebarIcon" style={{ color: 'skyblue' }} />
     <span className="sidebarListItemText">Feed</span>
@@ -94,22 +105,32 @@ export default function Sidebar() {
             <Chat className="sidebarIcon" style={{color:'skyblue'}}/>
             <span className="sidebarListItemText">Messenger</span>
           </li>
+          <Link to="/comingsoon" style={{ textDecoration: 'none' }}>
           <li className="sidebarListItem">
             <VideoLibraryIcon className="sidebarIcon" style={{color:'skyblue'}}/>
             <span className="sidebarListItemText">Videos</span>
           </li>
+          </Link>
+
+          <Link to="/comingsoon" style={{ textDecoration: 'none' }}>
           <li className="sidebarListItem">
             <StorefrontIcon className="sidebarIcon" style={{color:'skyblue'}}/>
             <span className="sidebarListItemText">Marketplace</span>
           </li>
+          </Link>
+          <Link to="/comingsoon" style={{ textDecoration: 'none' }}>
           <li className="sidebarListItem">
             <HelpOutline className="sidebarIcon" style={{color:'skyblue'}}/>
             <span className="sidebarListItemText">Questions</span>
           </li>
+          </Link>
+
+          <Link to="/comingsoon" style={{ textDecoration: 'none' }}>
           <li className="sidebarListItem">
             <Event className="sidebarIcon" style={{color:'skyblue'}}/>
             <span className="sidebarListItemText">Events</span>
           </li>
+          </Link>
           <li className="sidebarListItem" onClick={()=>logoutToggle(showHidden)}>
             <ExpandCircleDownRoundedIcon className="sidebarIcon" />
             <span className="sidebarListItemText" >Show more</span>

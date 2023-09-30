@@ -25,6 +25,7 @@ import { red } from '@mui/material/colors';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import MyJobTable from './MyJobTable';
+import Topbar from '../topbar/Topbar';
 
 const MyJob = () => {
 
@@ -97,15 +98,19 @@ const MyJob = () => {
       });
   };
     return (
+
+   
         <div className="lg:mx-12 my-10">
-      <div className="text-center">
-        <Typography variant="h4" sx={{ color: '#36D399', fontWeight: 'bold' }}>
-          My Toys
+            
+            <Topbar></Topbar>
+      <div className="text-center" style={{marginTop:"80px"}}>
+        <Typography variant="h4" sx={{ color: '#1976d2', fontWeight: 'bold',textAlign:"center",marginTop:"100px",marginBottom:"50px" }}>
+          My Posted Jobs
         </Typography>
       </div>
       <div className="overflow-x-auto w-full text-right ">
         <div className="mb-4 my-10">
-          <div>
+          {/* <div>
             <span className="ml-10 text-[#36D399] font-bold">Sort by price</span>
             <IconButton color="success" aria-label="ascending" onClick={sortByAscending}>
               <ArrowUpwardIcon />
@@ -113,7 +118,7 @@ const MyJob = () => {
             <IconButton color="success" aria-label="descending" onClick={sortByDescending}>
               <ArrowDownwardIcon />
             </IconButton>
-          </div>
+          </div> */}
         </div>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
