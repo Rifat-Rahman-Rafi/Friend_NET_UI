@@ -6,6 +6,8 @@ import axios from "axios"
 // export const getposts = (page) => API.get(`/posts?page=${page}`);
 export const getposts = () => API.get('/posts');
 
+export const getalluserinfo = () => API.get('/userInfo/getalluserinfo');
+
 export const createpost = (newPost) => API.post('/posts', newPost);
 export const getUserpost = (id) => API.get(`/posts/userProfile/${id}`, id);
 export const likepost = ({id, userId}) => API.patch(`/posts/likepost/${id}/${userId}`, {id, userId});
@@ -32,6 +34,6 @@ export const signup = (formData) => API.post('/user/signup', formData);
 export const createuserinfo = (info) => API.post("/userInfo/createuserinfo", info)
 export const getuserinfo = (id) => API.get(`/userInfo/getuserinfo/${id}`, id)
 export const updateuserinfo = (info) => API.patch(`/userInfo/updateuserinfo`, info)
-export const getalluserinfo = (page) => API.get(`/userInfo/getalluserinfo?page=${page}`, page)
+// export const getalluserinfo = (page) => API.get(`/userInfo/getalluserinfo?page=${page}`, page)
 export const getusernotifications = (id) => API.get(`/userInfo/getusernotifications/${id}`, id)
 export const followers = (data) => API.put(`/userInfo/followers`, data)

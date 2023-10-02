@@ -12,18 +12,32 @@ export const createuserinfo = (info) => async (dispatch) => {
     }
 }
 
-export const getalluserinfo = (page) => async (dispatch) => {
-    const { data } = await api.getalluserinfo(page)
+// export const getalluserinfo = (page) => async (dispatch) => {
+//     const { data } = await api.getalluserinfo(page)
 
+//     try {
+//         dispatch({ type: "GET_ALL_INFO",payload:  {data} })
+
+//         console.log(data)
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
+export const getalluserinfo = () => async (dispatch) => {
     try {
-        dispatch({ type: "GET_ALL_INFO",payload:  {data} })
+        const { data } = await api.getalluserinfo(); 
 
-        console.log(data)
+        dispatch({ type: "GET_ALL_INFO", payload: data });
+
+        console.log("HELLO ACTION",data);
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }
+
+
 export const getuserinfo = (id) => async (dispatch) => {
+    
     const { data } = await api.getuserinfo(id)
 
     try {

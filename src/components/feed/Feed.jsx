@@ -1,31 +1,14 @@
 import Post from "../post/Post";
 import "./feed.css";
 import Share from "../share/Share";
-// import axios from 'axios'
-// import { useEffect,useState } from "react";
-// import { Posts } from '../../dummyData';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getallpost, getposts } from "../../actions/posts";
 import axios from "axios";
 
 export default function Feed({changeState}) {
-  // const[posts,setPosts] = useState([]);
-  // useEffect(()=>{
-  //   const fetchPosts = async()=>{
-  //     const res = await axios.get("posts/timeline/62b980a429037a1e38b07192")
-  //     setPosts(res.data)
-  //   }
-  //   fetchPosts();
-  // },[]);
 
 
-
-  
-
-
-  
-   
   const { posts, postDetails, loading } = useSelector((state) => state.posts);
   const [messagee, setMessage] = useState("");
   const dispatch = useDispatch();
@@ -54,28 +37,6 @@ export default function Feed({changeState}) {
 
 
 
-
-
-
-
-
-
-  // const refresh = () => {
-  //   setPage(1)
-  //   window.scrollTo({top: 0, behavior: "smooth"})
-  //   dispatch(getposts(page));
-  // }
-
-
-  // const nextpage = () => {
-  //   if ( posts?.postMessages.length < 15) {
-  //             return
-  //           }
-  //           if (posts) {
-  //             setPage((e) => ++e)
-  //           }
-  //           window.scrollTo({top: 0, behavior: "smooth"})
-  // }
 
 
 

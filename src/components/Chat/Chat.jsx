@@ -630,8 +630,10 @@ import { Search, Send, PersonAdd } from '@mui/icons-material';
 import Img1 from '../../assets/img1.jpg';
 import tutorialsdev from '../../assets/tutorialsdev.png';
 import { io } from 'socket.io-client';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Topbar from '../topbar/Topbar';
+import { getalluserinfo } from '../../actions/userinfo';
+import CloseFriend from '../closeFriend/CloseFriend';
 
 const Chat = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user:detail')));
@@ -825,6 +827,16 @@ const Chat = () => {
       </div>
     </div>
   ));
+
+
+  const dispatch = useDispatch();
+  const alluserinfo = useSelector((state) => state.userinfo.alluserinfo);
+
+  useEffect(() => {
+    dispatch(getalluserinfo());
+  }, [dispatch]);
+
+  
 
   return (
    <div>
@@ -1179,6 +1191,32 @@ const Chat = () => {
                   }}
                   
                 >
+
+  
+{/* {Users.filter((user)=>{
+         return user.id >2 && user.id<6
+        }).map((u)=>(
+          <CloseFriend key={u.id} user={u} />
+          ))} */}
+  {/* {alluserinfo?.userInfor?.map((userinfo) => (
+  <CloseFriend key={userinfo._id} userinfo={userinfo} />
+))} */}
+{/*gfgfgf
+{alluserinfo?.userInfor?.map((p)=>(
+               <CloseFriend key={p._id} userinfo={p} />
+      ))}
+*/}
+{/* {Array.isArray(alluserinfo?.userInfor) && alluserinfo?.userInfor.map((userinfo) => (
+  
+ <h1>{userinfo.name}</h1>
+
+  ))} */}
+
+
+
+     {/* <CloseFriend></CloseFriend> */}
+
+
                   <Avatar
                     src={Img1}
                     sx={{ width: 60, height: 60, borderRadius: '50%', border: '2px solid #2196F3' }}

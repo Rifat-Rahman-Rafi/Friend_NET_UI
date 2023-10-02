@@ -2,6 +2,7 @@ import "./rightbar.css"
 import React from 'react'
 import {Users} from '../../dummyData'
 import OnlineFriend from "../online/OnlineFriend"
+import CloseFriend from "../closeFriend/CloseFriend"
 
 
 function Rightbar() {
@@ -27,11 +28,13 @@ function Rightbar() {
 
      
       <ul className="rightbarFriendList">
-        {Users.filter((user)=>{
+        {/* {Users.filter((user)=>{
          return user.id >1
         }).map((u)=>(
           <OnlineFriend key={u.id} user={u}/>
-          ))}
+          ))} */}
+
+          <OnlineFriend></OnlineFriend>
       </ul>
     </div>
   </div>

@@ -1,10 +1,7 @@
-// import React,{useEffect, useState} from 'react'
+
 import { useState } from 'react';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import './post.css'
-import { Users } from "../../dummyData";
-// import axios from 'axios';
-// import {format} from "timeago.js"
 import { commentforpost, deletecomment, likepost } from '../../actions/posts';
 import { format } from 'date-fns';
 import { useDispatch } from 'react-redux';
@@ -206,53 +203,19 @@ const [isLiked, setIsLiked] = useState(post.likes?.includes(user?.result?._id));
   const timestamp = post.createdAt; // Replace with your timestamp
   const relativeTime = formatRelativeTime(new Date(timestamp));
   
-  console.log(relativeTime); // Output will be a relative time string
-   // Output will be a relative time string
+  console.log(relativeTime); 
   
 
  
   return (
    <div className="post">
-    {/* <div className="postWrapper">
-        <div className="postTop">
-          <div className="postTopLeft">
-            <img className='postProfileImage' src={user.profilePicture || PF+"/person/noAvatar.png"} alt="" />
-            <span className="postUsername">{user.username}</span>
-            <span className="postDate">{format(post.createdAt)}</span>
-          </div>
-
-          <div className="postTopRight">
-               <MoreVertIcon style={{ cursor:'pointer'}}/>
-          </div>
-          </div>
-
-      <div className="postCenter">
-        <span className="postText">{post.desc}</span>
-        <img className='postImage' src={PF+"/post/"+post.img} alt="" />
-      </div>
-      <div className="postBottom">
-          <div className="postBottomLeft">
-            <div style={{display:'flex'}}>
-            <div className="likeIconCont">
-            <img className='likeIcon' onClick={likeHandler} src={PF+"like.png"} alt="" />
-            </div>
-            <div className="likeIconCont">
-            <img className='likeIcon' onClick={likeHandler}src={PF+"heart.png"} alt="" />
-              </div>
-            </div>
-            <span className="postLikeCounter">{like} people like it</span>
-          </div>
-          <div className="postBottomRight">
-           <span className="postCommentText">{post.comment} comments</span>
-          </div>
-          </div>
-        </div> */}
+    
     <div className="postWrapper">
     <div className="postTop">
       <div className="postTopLeft">
 
-      {post.profileImg ? (
-            <img onClick={handle} className='postProfileImage' src={post.profileImg} alt="" />
+      {post?.profileImg ? (
+            <img onClick={handle} className='postProfileImage' src={post?.profileImg} alt="" />
           ) : (
 
             <Avatar sx={{ bgcolor: 'black', width: 52, height: 52 }}>{text}</Avatar>
@@ -260,7 +223,7 @@ const [isLiked, setIsLiked] = useState(post.likes?.includes(user?.result?._id));
 
             
           )}
-        <span onClick={handle} className="postUsername">{post.name}</span>
+        <span onClick={handle} className="postUsername">{post?.name}</span>
 
         <span  className="postDate">{relativeTime}</span>
       </div>
@@ -273,13 +236,13 @@ const [isLiked, setIsLiked] = useState(post.likes?.includes(user?.result?._id));
       </div>
 
   <div className="postCenter">
-  {post.postDetails &&(
-           <span className="postText">{post.postDetails}</span>
+  {post?.postDetails &&(
+           <span className="postText">{post?.postDetails}</span>
     )}
 
 
-    {post.selectedFile &&(
-       <img className='postImage' src={post.selectedFile} alt="" />
+    {post?.selectedFile &&(
+       <img className='postImage' src={post?.selectedFile} alt="" />
     )}
    
   </div>

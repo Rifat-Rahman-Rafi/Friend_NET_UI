@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import WorkIcon from '@mui/icons-material/Work';
 import { Search } from '@mui/icons-material';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
+import AllUserInfo from "../AllUserInfo/AllUserInfo";
 export default function Sidebar() {
   //to hide/show certain elements
   const [showHidden,setShowHidden] = useState()
@@ -147,14 +148,16 @@ export default function Sidebar() {
         {/* <button className="sidebarButton">Show More</button> */}
         <hr className="sidebarHr" />
         
-        <h4 style={{color:'grey'}}>Your shortcuts</h4>
+        {/* <h4 style={{color:'grey'}}>Your shortcuts</h4>
         <ul className="sidebarFriendList">
         {Users.filter((user)=>{
          return user.id >2 && user.id<6
         }).map((u)=>(
           <CloseFriend key={u.id} user={u} />
           ))}
-        </ul>
+
+          {/* <AllUserInfo></AllUserInfo> */}
+        {/* </ul>  */}
       </div>
     </div>
   );
