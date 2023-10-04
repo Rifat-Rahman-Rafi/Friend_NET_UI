@@ -117,15 +117,7 @@ const MyJob = () => {
       </div>
       <div className="overflow-x-auto w-full text-right ">
         <div className="mb-4 my-10">
-          {/* <div>
-            <span className="ml-10 text-[#36D399] font-bold">Sort by price</span>
-            <IconButton color="success" aria-label="ascending" onClick={sortByAscending}>
-              <ArrowUpwardIcon />
-            </IconButton>
-            <IconButton color="success" aria-label="descending" onClick={sortByDescending}>
-              <ArrowDownwardIcon />
-            </IconButton>
-          </div> */}
+        
         </div>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -143,27 +135,24 @@ const MyJob = () => {
                 <TableCell align="center">Delete button</TableCell>
               </TableRow> 
             </TableHead>
-            <TableBody>
-              {loading ? (
-                <TableRow>
-                  <TableCell  align="center">
-                    <CircularProgress color="primary" />
-                  </TableCell>
-                </TableRow>
-              ) : (
-                toys.map((toys, index) => (
-                  <MyJobTable
-                    key={toys._id}
-                    toys={toys}
-                    index={index + 1}
-                    handleDeleteToy={handleDeleteToy}
-                  />
-                ))
-                // toys.map((toys) => (
-                //     <MyJobTable key={toys._id} toys={toys} />
-                //   ))
-              )}
-            </TableBody>
+            <TableBody style={{height: "30vh"}}>
+  {loading ? (
+    <TableRow>
+      <TableCell align="center" colSpan={7}> {/* Use colSpan to span all columns */}
+        <CircularProgress color="primary" />
+      </TableCell>
+    </TableRow>
+  ) : (
+    toys.map((toys, index) => (
+      <MyJobTable
+        key={toys._id}
+        toys={toys}
+        index={index + 1}
+        handleDeleteToy={handleDeleteToy}
+      />
+    ))
+  )}
+</TableBody>
           </Table>
         </TableContainer>
       </div>
