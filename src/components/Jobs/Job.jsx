@@ -8,6 +8,8 @@ import { Button, useMediaQuery } from '@mui/material';
 import { TextareaAutosize } from '@mui/base/TextareaAutosize';
 import { styled } from '@mui/system';
 import Topbar from "../topbar/Topbar";
+import Swal from 'sweetalert2';
+
 
 const Job = () => {
 
@@ -74,7 +76,7 @@ const Job = () => {
 
    
 
-   const handleSubmit = (event) => {
+   const handleSubmit = async (event) => {
     event.preventDefault();
 
     // Access the form data
@@ -109,12 +111,13 @@ const Job = () => {
             .then(res => res.json())
             .then(data => {
                 console.log("IIINNNN",data);
-                // Swal.fire({
-                //     title: 'Successfully Add Toys',
-                //     text: 'Do you want to continue',
-                //     icon: 'success',
-                //     confirmButtonText: 'Cool'
-                // })
+                Swal.fire({
+                    title: 'Successfully Add Toys',
+                    text: 'Do you want to continue',
+                    icon: 'success',
+                    confirmButtonText: 'Cool'
+                })
+                event.target.reset();
             })
 
     }

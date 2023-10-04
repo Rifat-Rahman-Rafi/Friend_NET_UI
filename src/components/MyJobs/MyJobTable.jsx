@@ -27,17 +27,19 @@ const MyJobTable = ({ toys, handleDeleteToy }) => {
     const user = JSON.parse(localStorage.getItem("profile"));
 
     //  console.log("NNTTTTT",toys)
-    const { _id, sellerName, jobTitle, companyName, email,  salary,  employType } = toys;
+    const { _id, sellerName, jobTitle, companyName, email,  salary,  employType,deadline } = toys;
     const [openDialog, setOpenDialog] = useState(false);
     const [priceInput, setPriceInput] = useState(salary);
     const [employTypeInput, setEmployTypeInput] = useState(employType);
     const [jobTitleInput, setJobTitleInput] = useState(jobTitle);
+    const [deadlineInput, setDeadlineInput] = useState(deadline);
     const [loading, setLoading] = useState(false);
   
     const handleOpenDialog = () => {
       setPriceInput(salary);
       setEmployTypeInput(employType);
       setJobTitleInput(jobTitle);
+      setDeadlineInput(deadline);
       setOpenDialog(true);
     };
   
@@ -52,6 +54,7 @@ const MyJobTable = ({ toys, handleDeleteToy }) => {
         salary: priceInput,
         employType: employTypeInput,
         jobTitle: jobTitleInput,
+        deadline:deadlineInput
       };
   
       fetch(`http://localhost:7070/allToy/details/${_id}`, {
@@ -104,31 +107,47 @@ const MyJobTable = ({ toys, handleDeleteToy }) => {
         <IconButton  color="primary" aria-label="edit" onClick={handleOpenDialog}>
           <EditIcon />
         </IconButton>
-        <Dialog open={openDialog} onClose={handleCloseDialog} fullWidth maxWidth="sm">
+        <Dialog  open={openDialog} onClose={handleCloseDialog} fullWidth maxWidth="sm">
           <DialogTitle>Update Job Information</DialogTitle>
-          <DialogContent>
-            <TextField
-              label="Price"
+          <DialogContent >
+          <TextField
+              label="Job Title"
               fullWidth
+              multiline
               variant="outlined"
-              value={priceInput}
-              onChange={(e) => setPriceInput(e.target.value)}
+              value={jobTitleInput}
+              onChange={(e) => setJobTitleInput(e.target.value)}
+              style={{margin:"10px"}}
             />
-            <TextField
-              label="Available Quantity"
+
+<TextField
+              label="EmployType"
               fullWidth
               variant="outlined"
               value={employTypeInput}
               onChange={(e) => setEmployTypeInput(e.target.value)}
+              style={{margin:"10px"}}
             />
+
             <TextField
-              label="Description"
+              label="Salary"
+              fullWidth
+              variant="outlined"
+              value={priceInput}
+              onChange={(e) => setPriceInput(e.target.value)}
+              style={{margin:"10px"}}
+              
+            />
+            
+            <TextField
+              label="Deadline"
               fullWidth
               multiline
               rows={4}
               variant="outlined"
-              value={jobTitleInput}
-              onChange={(e) => setJobTitleInput(e.target.value)}
+              value={deadlineInput}
+              onChange={(e) => setDeadlineInput(e.target.value)}
+              style={{margin:"10px"}}
             />
           </DialogContent>
           <DialogActions>
