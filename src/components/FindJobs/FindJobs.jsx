@@ -37,7 +37,7 @@ const FindJobs = () => {
     <div>
     <Topbar></Topbar>
 
-    <div>
+    <div style={{marginTop:"60px"}}>
         
     <Box sx={{ width: 1 }}>
 <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={2}>
@@ -50,7 +50,7 @@ const FindJobs = () => {
 
 >
 
-<div style={{marginTop:"80px"}}>
+<div style={{marginTop:"60px"}}>
 
 
 

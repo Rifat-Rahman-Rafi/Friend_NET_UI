@@ -16,6 +16,7 @@ import {
   CardHeader,
   Avatar,
   CircularProgress,
+  Grid,
 } from '@mui/material';
 
 import Swal from 'sweetalert2/dist/sweetalert2.js';
@@ -26,6 +27,7 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import MyJobTable from './MyJobTable';
 import Topbar from '../topbar/Topbar';
+import Sidebar from '../sidebar/Sidebar';
 
 const MyJob = () => {
 
@@ -103,8 +105,13 @@ const MyJob = () => {
         <div className="lg:mx-12 my-10">
             
             <Topbar></Topbar>
-      <div className="text-center" style={{marginTop:"80px"}}>
-        <Typography variant="h4" sx={{ color: '#1976d2', fontWeight: 'bold',textAlign:"center",marginTop:"100px",marginBottom:"50px" }}>
+            <Grid container style={{marginTop:"60px"}}>
+  <Grid xs={2}>
+    <Sidebar></Sidebar>
+  </Grid>
+  <Grid xs={10}>
+  <div className="text-center" >
+        <Typography variant="h4" sx={{ color: '#1976d2', fontWeight: 'bold',textAlign:"center",marginTop:"50px",marginBottom:"50px" }}>
           My Posted Jobs
         </Typography>
       </div>
@@ -160,6 +167,9 @@ const MyJob = () => {
           </Table>
         </TableContainer>
       </div>
+  </Grid>
+  </Grid>
+      
     </div>
     );
 };
