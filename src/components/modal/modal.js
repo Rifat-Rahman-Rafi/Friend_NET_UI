@@ -172,11 +172,45 @@ function Modall() {
     setShow(false);
     setPostinfo({ ...postInfo, creator: id });
     if (userinfo?.data?.userInfor) {
+      dispatch(updateuserinfo(postInfo));
+      console.log("updating",userinfo?.data?.userInfor);
     }
-    console.log("updating");
-
-    dispatch(updateuserinfo(postInfo));
+    
+    
+    
   };
+
+  // const handleClose = () => {
+  //   setShow(false);
+  
+  //   // Create an object to store only the changed fields
+  //   const updatedFields = { ...postInfo }; // Start with a copy of the current state
+  
+  //   if (postInfo.profileImg !== "") {
+  //     updatedFields.profileImg = postInfo.profileImg;
+  //   }
+    
+  //   if (postInfo.bio !== "") {
+  //     updatedFields.bio = postInfo.bio;
+  //   }
+  
+  //   if (postInfo.coverImg !== "") {
+  //     updatedFields.coverImg = postInfo.coverImg;
+  //   }
+  
+  //   // Dispatch the updatedFields to your API
+  //   if (userinfo?.data?.userInfor) {
+  //     setPostinfo({ updatedFields, creator: id });
+  //     dispatch(updateuserinfo(updatedFields));
+  //     console.log("updating", userinfo?.data?.userInfor);
+  //   }
+  // };
+
+
+  const handleClose1=()=>{
+    setShow(false);
+  }
+  
 
   const style = {
     
@@ -214,7 +248,7 @@ function Modall() {
                   setPostinfo({ ...postInfo, profileImg: base64 })
                 }
               />
-              {<p>{postInfo?.profileImg}</p>}
+              {/* {<p>{postInfo?.profileImg}</p>} */}
             </div>
           </label>
           <h4>Choose Your Cover Picture</h4>
@@ -248,7 +282,7 @@ function Modall() {
               setPostinfo({ ...postInfo, bio: e.target.value })
             }
           />
-          <Button variant="outlined" onClick={handleClose} style={{ marginRight: "8px" }}>
+          <Button variant="outlined" onClick={handleClose1} style={{ marginRight: "8px" }}>
             Close
           </Button>
           <Button variant="contained" onClick={handleClose}>

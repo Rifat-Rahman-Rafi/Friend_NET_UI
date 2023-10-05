@@ -17,12 +17,12 @@ export default function Post({post}) {
   const dispatch = useDispatch();
 
 
-const [isLiked, setIsLiked] = useState(post.likes?.includes(user?.result?._id));
-  const [likes, setLikes] = useState(post.likes?.length || 0);
+const [isLiked, setIsLiked] = useState(post?.likes?.includes(user?.result?._id));
+  const [likes, setLikes] = useState(post?.likes?.length || 0);
 
 
   function handle() {
-    navigate(`/profile/${post.creator}`);
+    navigate(`/profile/${post?.creator}`);
   }
 
 
@@ -36,7 +36,7 @@ const [isLiked, setIsLiked] = useState(post.likes?.includes(user?.result?._id));
 
       setIsLiked(!isLiked);
 
-      await dispatch(likepost({ id: post._id, userId: user?.result?._id, setMessage: post.setMessage, name: post.name, creator: post.creator }));
+      await dispatch(likepost({ id: post?._id, userId: user?.result?._id, setMessage: post.setMessage, name: post.name, creator: post.creator }));
     } catch (error) {
       console.error(error);
     }
@@ -113,9 +113,9 @@ const [isLiked, setIsLiked] = useState(post.likes?.includes(user?.result?._id));
   // },[post.userId]);
 
 
-  const text = post.name?.charAt(0);
+  const text = post?.name?.charAt(0);
 
-  const newarr = post.comments?.map((val, i) => val.split(":"))
+  const newarr = post?.comments?.map((val, i) => val.split(":"))
 
   const [show, setShow] = useState(false);
   const commenthandle = () => {
@@ -125,15 +125,15 @@ const [isLiked, setIsLiked] = useState(post.likes?.includes(user?.result?._id));
   
   const [comment, setComment] = useState("");
   const commentFunc = () => {
-    dispatch(commentforpost({ comment, name: user?.result?.name, id: post._id, setMessage: post.setMessage }));
+    dispatch(commentforpost({ comment, name: user?.result?.name, id: post?._id, setMessage: post.setMessage }));
     setComment("")
   };
 
   const test = JSON.parse(localStorage.getItem("profile"));
-  const _id = test.result._id;
+  const _id = test?.result?._id;
 
 
-  console.log("TEST",test);
+  // console.log("TEST",test);
 
 
   const commentDelete = () => {
@@ -156,7 +156,7 @@ const [isLiked, setIsLiked] = useState(post.likes?.includes(user?.result?._id));
 
     
     
-    console.log("secondsDifference",secondsDifference ,timeDifference)
+    console.log("secondsDifference",currentTimestamp,timestampDate )
   
     if (secondsDifference < 60 ) {
       if (secondsDifference <= 1) {
@@ -200,7 +200,7 @@ const [isLiked, setIsLiked] = useState(post.likes?.includes(user?.result?._id));
     }
   }
   
-  const timestamp = post.createdAt; // Replace with your timestamp
+  const timestamp = post?.createdAt; // Replace with your timestamp
   const relativeTime = formatRelativeTime(new Date(timestamp));
   
   console.log(relativeTime); 
@@ -264,9 +264,9 @@ const [isLiked, setIsLiked] = useState(post.likes?.includes(user?.result?._id));
         )}
       </div>
       <div className="postBottomRight">
-      {newarr.length > 0 ? (
+      {newarr?.length > 0 ? (
     <span className="postCommentText" onClick={commenthandle}>
-      {newarr.length} comments
+      {newarr?.length} comments
     </span>
   ) :  <span className="postCommentText" onClick={commenthandle}>
    comments

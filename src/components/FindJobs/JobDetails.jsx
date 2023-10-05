@@ -26,7 +26,7 @@ import Topbar from '../topbar/Topbar'
 import Sidebar from '../sidebar/Sidebar';
 
 import { Link as MuiLink } from '@mui/material';
-import JobDetail from '../JobDetail/JobDetail';
+import JobDetail from '../JobDetail/NJobDetail';
 import Home from '../../pages/home/Home';
 
 

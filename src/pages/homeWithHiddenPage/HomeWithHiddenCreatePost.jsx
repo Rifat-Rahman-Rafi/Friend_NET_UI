@@ -142,6 +142,7 @@ import {AiFillCamera} from "react-icons/ai"
 import { useDispatch, useSelector } from "react-redux";
 import { createpost, getposts, getUserpost } from "../../actions/posts";
 import { Alert, Avatar } from "@mui/material";
+import Swal from 'sweetalert2';
 
 export default function CreatePost() {
 
@@ -163,15 +164,17 @@ export default function CreatePost() {
   const user = JSON.parse(localStorage.getItem("profile"));
   
   const handlePostClick = () => {
-    const postText = ref.current.value;
-    const selectedFile = postData.selectedFile; // Set this value based on file selection logic
+    const postText = ref?.current?.value;
+    const selectedFile = postData?.selectedFile; // Set this value based on file selection logic
     
 
-    if (!postText.trim() && !selectedFile) {
-
-      setShowAlert(true);
-      
-      alert("Please enter text or select a image before posting.");
+    if (!postText?.trim() && !selectedFile) {
+      // Use SweetAlert2 for the alert
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please enter text or select an image before posting.',
+      });
       return; // Exit the function if no text or file is provided
     }
 
@@ -179,8 +182,8 @@ export default function CreatePost() {
       createpost({
         postDetails: postText,
         selectedFile:selectedFile,
-        name: user.result.name,
-        creator: user.result._id,
+        name: user?.result?.name,
+        creator: user?.result?._id,
         profileImg: userinfo?.data?.userInfor?.profileImg
       })
     );

@@ -13,6 +13,8 @@ import { useEffect, useState } from "react";
  import { getUserpost } from "../../actions/posts";
  import Avatar from "@mui/material/Avatar";
 import Post from '../post/Post';
+import NotificationModal from '../modal/NotificationModal';
+import { Button } from 'react-bootstrap';
 
 export default function Topbar() {
 
@@ -54,7 +56,16 @@ export default function Topbar() {
     );
     setFilteredPosts(filteredPosts);
   };
-  
+  // const handleSearch = (e) => {
+  //   e.preventDefault();
+  //   const form = e.target;
+  //   const searchText = form.search.value;
+
+  //   console.log(searchText);
+  //   fetch(`http://localhost:5000/friendName/${searchText}`)
+  //     .then((res) => res.json())
+  //     .then((data) => setSearchText(data));
+  // };
 
 
   return (
@@ -80,7 +91,18 @@ export default function Topbar() {
           {/* {filteredPosts.map((post) => (
             <Post key={post._id} post={post} />
           ))} */}
-        </div>
+       </div> 
+
+        {/* <form onSubmit={handleSearch} style={{ display: "flex", alignItems: "center" }}>
+          <input name="search" label="Search by Jobs Title" variant="outlined" fullWidth />
+          <Button variant="contained"  type="submit" style={{height:"55px"}}>
+            
+            <Search />
+            
+
+            
+          </Button>
+        </form> */}
       <div className="topbarCenter">
       <div className="topbarLinks">
         <div className="topbarCenterIcon">
@@ -119,15 +141,16 @@ export default function Topbar() {
             <span className="topbarIconBadge">2</span>
           </div>
           <div className="topbarIconItem">
-          <div className="topbarIconCont">
-          <Notifications  style={{color:"black",borderRadius:'50%',fontSize:'21px'}}/>
-            </div>
-            <span className="topbarIconBadge">1</span>
+         
+          <NotificationModal></NotificationModal>
+          
+           
           </div>
         </div>
         {/* <Link to="/profile/bhabishya" style={{textDecoration:'none'}}>
         <img src="/assets/person/1.jpeg" alt="" className="topbarImg"/>
         </Link> */}
+        {/* <NotificationModal></NotificationModal> */}
         {userinfo?.data?.userInfor?.profileImg ? (
 
           <Avatar onClick={handle} alt="Travis Howard" src={userinfo?.data?.userInfor?.profileImg} />

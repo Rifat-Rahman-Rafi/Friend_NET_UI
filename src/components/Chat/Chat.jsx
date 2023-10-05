@@ -634,6 +634,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Topbar from '../topbar/Topbar';
 import { getalluserinfo } from '../../actions/userinfo';
 import CloseFriend from '../closeFriend/CloseFriend';
+import { Link } from 'react-router-dom';
 
 const Chat = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user:detail')));
@@ -769,6 +770,24 @@ const Chat = () => {
 
   console.log("text",user.firstName);
 
+  const dispatch = useDispatch();
+  const alluserinfo = useSelector((state) => state.userinfo.alluserinfo);
+
+  useEffect(() => {
+    dispatch(getalluserinfo());
+  }, [dispatch]);
+
+
+  //console.log("user?.firstName",alluserinfo)
+
+  const combinedArray = alluserinfo?.userInfor?.map((userinfo, index) => ({
+    userinfo,
+    user: users[index],
+  }));
+
+
+
+
 
   const [scrollPercentage, setScrollPercentage] = useState(0);
   const messagesRef = useRef(null);
@@ -795,7 +814,7 @@ const Chat = () => {
     };
   }, []);
 
-  // Your conversations mapping code
+  
   const conversationsList = conversations?.map(({ conversationId, user }) => (
     <div
       key={conversationId}
@@ -828,14 +847,56 @@ const Chat = () => {
     </div>
   ));
 
+  // const conversationsList = conversations?.map(({ conversationId, user }, index) => {
+  //   // Access the corresponding user data from alluserinfo?.userInfor
+  //   const userinfo = alluserinfo?.userInfor?.[index];
 
-  const dispatch = useDispatch();
-  const alluserinfo = useSelector((state) => state.userinfo.alluserinfo);
+  //   console.log("userinfo NNNEEE",conversationId)
+  
+  //   return (
+  //     <div
+  //       key={conversationId}
+  //       style={{
+  //         display: 'flex',
+  //         alignItems: 'center',
+  //         padding: '8px 0',
+  //         borderBottom: '1px solid #E0E0E0',
+  //       }}
+  //     >
+  //       <div
+  //         style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+  //         onClick={async () => {
+  //           await fetchMessages(conversationId, user);
+  //         }}
+  //       >
+  //         <Avatar
+  //           src={userinfo?.profileImg} // You may want to use userinfo?.profileImg here
+  //           sx={{ width: 60, height: 60, borderRadius: '50%', border: '2px solid #2196F3' }}
+  //         />
+  //         <div style={{ marginLeft: '6px' }}>
+  //           <Typography variant="h6" style={{ fontWeight: 'bold' }}>
+  //             {user?.user?.firstName}
+  //           </Typography>
+  //           <Typography variant="body2" style={{ color: '#757575' }}>
+  //             {user?.email}
+  //           </Typography>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // });
+  
 
-  useEffect(() => {
-    dispatch(getalluserinfo());
-  }, [dispatch]);
 
+  // combinedArray?.forEach(({ userinfo, user }) => {
+  //   // Access userinfo and user here
+  //    console.log('User Info:', userinfo.profileImg);
+  //   console.log('User:', user.user);
+    
+  // });
+  
+  
+  
   
 
   return (
@@ -895,6 +956,50 @@ const Chat = () => {
           overflowY: 'auto',
         }}
       >
+
+{/* {combinedArray?.length > 0 ? (
+  combinedArray?.map(({ userinfo, user }, userId) => (
+
+<div
+      key={userId}
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        padding: '8px 0',
+        borderBottom: '1px solid #E0E0E0',
+      }}
+    >
+      <div
+        style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+        onClick={async () => {
+          await fetchMessages(user?.user?.conversationId, user?.user);
+        }}
+      >
+        <Avatar
+          src={userinfo.profileImg}
+          sx={{ width: 60, height: 60, borderRadius: '50%', border: '2px solid #2196F3' }}
+        />
+        <div style={{ marginLeft: '6px' }}>
+          <Typography variant="h6" style={{ fontWeight: 'bold' }}>
+            {user?.user?.firstName}
+          </Typography>
+          <Typography variant="body2" style={{ color: '#757575' }}>
+            {user?.user?.email}
+          </Typography>
+        </div>
+      </div>
+    </div>
+
+
+))
+) : (
+  <Typography variant="h6" style={{ textAlign: 'center', fontWeight: 'bold', marginTop: '24px' }}>
+    No Conversations
+  </Typography>
+)} */}
+
+
+
         {conversations?.length > 0 ? (
           conversationsList
         ) : (
@@ -1173,6 +1278,52 @@ const Chat = () => {
           People
         </Typography>
         <div>
+
+
+{/*       
+        {/* {combinedArray?.length > 0 ? (
+  combinedArray?.map(({ userinfo, user }, userId) => (
+    <div
+      key={userId}
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        padding: '8px 0',
+        borderBottom: '1px solid #E0E0E0',
+      }}
+    >
+      <div
+        style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+        onClick={async () => {
+          await fetchMessages('new', user?.user);
+        }}
+      >
+        <Avatar
+          src={userinfo?.profileImg}
+          sx={{ width: 60, height: 60, borderRadius: '50%', border: '2px solid #2196F3' }}
+        />
+        <div style={{ marginLeft: '6px' }}>
+          <Typography variant="h6" style={{ fontWeight: 'bold' }}>
+            {user?.user?.firstName}
+          </Typography>
+          <Typography variant="body2" style={{ color: '#757575' }}>
+            {user?.user?.email}
+          </Typography>
+        </div>
+      </div>
+    </div>
+  ))
+) : (
+  <Typography variant="h6" style={{ textAlign: 'center', fontWeight: 'bold', marginTop: '24px' }}>
+    No Conversations
+  </Typography>
+)} */}
+        
+     
+
+
+  
+
           {users?.length > 0 ? (
             users.map(({ userId, user }) => (
               <div
@@ -1192,29 +1343,9 @@ const Chat = () => {
                   
                 >
 
-  
-{/* {Users.filter((user)=>{
-         return user.id >2 && user.id<6
-        }).map((u)=>(
-          <CloseFriend key={u.id} user={u} />
-          ))} */}
-  {/* {alluserinfo?.userInfor?.map((userinfo) => (
-  <CloseFriend key={userinfo._id} userinfo={userinfo} />
-))} */}
-{/*gfgfgf
-{alluserinfo?.userInfor?.map((p)=>(
-               <CloseFriend key={p._id} userinfo={p} />
-      ))}
-*/}
-{/* {Array.isArray(alluserinfo?.userInfor) && alluserinfo?.userInfor.map((userinfo) => (
-  
- <h1>{userinfo.name}</h1>
-
-  ))} */}
 
 
 
-     {/* <CloseFriend></CloseFriend> */}
 
 
                   <Avatar

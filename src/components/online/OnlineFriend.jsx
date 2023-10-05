@@ -27,8 +27,7 @@ export default function OnlineFriend() {
       {Array.isArray(alluserinfo?.userInfor) && alluserinfo?.userInfor.map((userinfo) => (
         <li className='rightbarFriend' key={userinfo._id}>
           <div className="rightbarProfileImageCont">
-            {/* Wrap the image with a Link */}
-            {/* <Link to={`/chat/${userinfo._id}`}></Link> */}
+            
 
             
             <Link to={"/chat"}>
@@ -36,7 +35,7 @@ export default function OnlineFriend() {
             </Link>
             <span className="rightbarOnline"></span>
           </div>
-          {/* Wrap the name with a Link */}
+        
           <Link to={'/chat'} className="rightbarUsername">
             <b >{userinfo?.name}</b>
           </Link>

@@ -23,6 +23,8 @@ import MyJobTable from "./components/MyJobs/MyJobTable";
 import MyJob from "./components/MyJobs/MyJob";
 import ComingSoon from "./components/ComingSoon/ComingSoon";
 import AllUserInfo from "./components/AllUserInfo/AllUserInfo";
+import NJobDetail from "./components/JobDetail/NJobDetail";
+import NotFound from "./components/NotFound/NotFound";
 function App() {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -39,7 +41,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/chat" element={<Chat></Chat>} />
-        {/* <Route path="/chat" element={<Dashboard></Dashboard>} /> */}
+        
         <Route path="/job" element={<Job></Job>} />
         <Route path="/findjobs" element={<FindJobs></FindJobs>} />
 
@@ -50,6 +52,8 @@ function App() {
         <Route path="/comingsoon"element={<ComingSoon/>} />
 
         <Route path="/alluser"element={<AllUserInfo/>} />
+        {/* <Route path="/e"element={<NJobDetail></NJobDetail>}/> */}
+        <Route path="*" element={<NotFound />} />
 
         
 

@@ -17,6 +17,7 @@ export default function Home({showCreatePost,changeState}) {
          <div className="homeContainer">
          <Sidebar/>
          <Feed changeState={changeState}/>
+        
          <Rightbar/>
          </div>
 

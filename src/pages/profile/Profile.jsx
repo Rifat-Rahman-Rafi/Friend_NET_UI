@@ -150,38 +150,38 @@ function Profile() {
   const [users, setUsers] = useState([]);
 
 
-  useEffect(() => {
-    if (allIds && allIds.length > 0) {
-      // Convert the array of IDs to a comma-separated string
-      const userIdsString = allIds.join(',');
+  // useEffect(() => {
+  //   if (allIds && allIds.length > 0) {
+  //     // Convert the array of IDs to a comma-separated string
+  //     const userIdsString = allIds.join(',');
 
-      //console.log("userIdsString",userIdsString)
+  //     //console.log("userIdsString",userIdsString)
 
-      // Make a GET request to fetch user data
-      fetch(`/getUsersByIds?userIds=${userIdsString}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP Error! Status: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then((data) => {
-          if (data.users) {
-            setUsers(data.users);
-          } else {
-            console.error('No users data found in the response:', data);
-          }
-        })
-        .catch((error) => {
-          console.error('Fetch error:', error);
-        });
-    }
-  }, [allIds]);
+  //     // Make a GET request to fetch user data
+  //     fetch(`/getUsersByIds?userIds=${userIdsString}`, {
+  //       method: 'GET',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //     })
+  //       .then((response) => {
+  //         if (!response.ok) {
+  //           throw new Error(`HTTP Error! Status: ${response.status}`);
+  //         }
+  //         return response.json();
+  //       })
+  //       .then((data) => {
+  //         if (data.users) {
+  //           setUsers(data.users);
+  //         } else {
+  //           console.error('No users data found in the response:', data);
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         console.error('Fetch error:', error);
+  //       });
+  //   }
+  // }, [allIds]);
 
  
   
