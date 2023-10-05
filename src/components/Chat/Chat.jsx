@@ -663,7 +663,7 @@ const Chat = () => {
       socket.on('getMessage', async (data) => {
         setMessages((prev) => ({
           ...prev,
-          messages: [...prev.messages, { user: data.user, message: data.message }],
+          messages: [...prev.messages, { user: data?.user, message: data?.message }],
         }));
       });
     }
@@ -770,20 +770,20 @@ const Chat = () => {
 
   console.log("text",user.firstName);
 
-  const dispatch = useDispatch();
-  const alluserinfo = useSelector((state) => state.userinfo.alluserinfo);
+  // const dispatch = useDispatch();
+  // const alluserinfo = useSelector((state) => state.userinfo.alluserinfo);
 
-  useEffect(() => {
-    dispatch(getalluserinfo());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getalluserinfo());
+  // }, [dispatch]);
 
 
   //console.log("user?.firstName",alluserinfo)
 
-  const combinedArray = alluserinfo?.userInfor?.map((userinfo, index) => ({
-    userinfo,
-    user: users[index],
-  }));
+  // const combinedArray = alluserinfo?.userInfor?.map((userinfo, index) => ({
+  //   userinfo,
+  //   user: users[index],
+  // }));
 
 
 

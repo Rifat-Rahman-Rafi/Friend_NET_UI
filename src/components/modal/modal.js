@@ -168,43 +168,44 @@ function Modall() {
     name: userId?.result?.name,
   });
 
-  const handleClose = () => {
-    setShow(false);
-    setPostinfo({ ...postInfo, creator: id });
-    if (userinfo?.data?.userInfor) {
-      dispatch(updateuserinfo(postInfo));
-      console.log("updating",userinfo?.data?.userInfor);
-    }
-    
-    
-    
-  };
-
   // const handleClose = () => {
   //   setShow(false);
-  
-  //   // Create an object to store only the changed fields
-  //   const updatedFields = { ...postInfo }; // Start with a copy of the current state
-  
-  //   if (postInfo.profileImg !== "") {
-  //     updatedFields.profileImg = postInfo.profileImg;
+  //   setPostinfo({ ...postInfo, creator: id });
+  //   if (userinfo?.data?.userInfor) {
+  //     dispatch(updateuserinfo(postInfo));
+  //     console.log("updating",userinfo?.data?.userInfor);
   //   }
     
-  //   if (postInfo.bio !== "") {
-  //     updatedFields.bio = postInfo.bio;
-  //   }
-  
-  //   if (postInfo.coverImg !== "") {
-  //     updatedFields.coverImg = postInfo.coverImg;
-  //   }
-  
-  //   // Dispatch the updatedFields to your API
-  //   if (userinfo?.data?.userInfor) {
-  //     setPostinfo({ updatedFields, creator: id });
-  //     dispatch(updateuserinfo(updatedFields));
-  //     console.log("updating", userinfo?.data?.userInfor);
-  //   }
+    
+    
   // };
+
+  const handleClose = () => {
+    setShow(false);
+  
+    // Create an object to store only the changed fields
+    const updatedFields = { ...postInfo }; // Start with a copy of the current state
+  
+    if (postInfo.profileImg !== "") {
+      updatedFields.profileImg = postInfo?.profileImg;
+    }
+    
+    if (postInfo.bio !== "") {
+      updatedFields.bio = postInfo?.bio;
+    }
+  
+    if (postInfo.coverImg !== "") {
+      updatedFields.coverImg = postInfo?.coverImg;
+    }
+  
+    // Dispatch the updatedFields to your API
+    if (userinfo?.data?.userInfor) {
+      setPostinfo({ updatedFields, creator: id });
+      dispatch(updateuserinfo(updatedFields));
+      // console.log("updating", userinfo?.data?.userInfor);
+      console.log("UPDATE",updatedFields)
+    }
+  };
 
 
   const handleClose1=()=>{
