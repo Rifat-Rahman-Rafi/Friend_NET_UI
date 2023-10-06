@@ -5,6 +5,7 @@ import axios from "axios"
  const API = axios.create({ baseURL: 'http://localhost:5000'})
 // export const getposts = (page) => API.get(`/posts?page=${page}`);
 export const getposts = () => API.get('/posts');
+export const getsearch=(searchText)=>API.get(`/friendName/${searchText}`)
 
 export const getalluserinfo = () => API.get('/userInfo/getalluserinfo');
 

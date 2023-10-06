@@ -3,6 +3,8 @@ export default (state = { posts: [], userposts: [], message: [],loading: true },
   switch (action.type) {
     case "getposts":
       return { ...state, posts: action.payload.data, loading: false };
+      case "getsearch":
+      return { ...state, posts: action.payload.data, loading: false };
     case "createpost":
       return { ...state, message: action.payload };
     case "getUserpost":

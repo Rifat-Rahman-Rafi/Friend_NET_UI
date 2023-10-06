@@ -10,7 +10,7 @@ import {Link,  useNavigate,  useParams} from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
  import { getuserinfo } from "../../actions/userinfo";
- import { getUserpost } from "../../actions/posts";
+ import { getUserpost, getsearch } from "../../actions/posts";
  import Avatar from "@mui/material/Avatar";
 import Post from '../post/Post';
 import NotificationModal from '../modal/NotificationModal';
@@ -44,29 +44,43 @@ export default function Topbar() {
   const text = userinfo?.data?.userInfor?.name?.charAt(0);
 
   const [searchText, setSearchText] = useState("");
+
   const [filteredPosts, setFilteredPosts] = useState(userposts);
 
+  // const handleSearch = (e) => {
+  //   const text = e.target.value;
+  //   setSearchText(text);
+  
+  //   // Filter posts based on user names
+  //   const filteredPosts = userposts.filter((post) =>
+  //     post?.name?.toLowerCase().includes(text.toLowerCase())
+  //   );
+  //   setFilteredPosts(filteredPosts);
+  // };
+
+  // const handleSearch = () => {
+  //   dispatch(getsearch(searchText));
+
+  //   console.log("searchText",searchText,filteredPosts)
+  // };
+
+  // const { posts, postDetails, loading } = useSelector((state) => state.posts);
   const handleSearch = (e) => {
     const text = e.target.value;
     setSearchText(text);
-  
+
     // Filter posts based on user names
     const filteredPosts = userposts.filter((post) =>
-      post.name.toLowerCase().includes(text.toLowerCase())
+      post?.name?.toLowerCase().includes(text.toLowerCase())
     );
     setFilteredPosts(filteredPosts);
+
+    // Dispatch the search action
+    dispatch(getsearch(text));
   };
-  // const handleSearch = (e) => {
-  //   e.preventDefault();
-  //   const form = e.target;
-  //   const searchText = form.search.value;
 
-  //   console.log(searchText);
-  //   fetch(`http://localhost:5000/friendName/${searchText}`)
-  //     .then((res) => res.json())
-  //     .then((data) => setSearchText(data));
-  // };
-
+  console.log("filteredPosts",userposts,userinfo)
+  
 
   return (
     <>
@@ -80,10 +94,11 @@ export default function Topbar() {
         </div>
         <div className="topbarLeft2">
           <div className="searchbar">
-            <Search className="searchIcon" />
+            <Search onClick={handleSearch} className="searchIcon" />
             <input
               placeholder="Search by user name"
               className="searchInput"
+              // onChange={handleSearch}
               onChange={handleSearch}
               value={searchText}
             />
@@ -92,6 +107,12 @@ export default function Topbar() {
             <Post key={post._id} post={post} />
           ))} */}
        </div> 
+
+       <div className="topbarPosts">
+          {filteredPosts.map((post) => (
+            <Post key={post._id} post={post} />
+          ))}
+        </div>
 
         {/* <form onSubmit={handleSearch} style={{ display: "flex", alignItems: "center" }}>
           <input name="search" label="Search by Jobs Title" variant="outlined" fullWidth />
