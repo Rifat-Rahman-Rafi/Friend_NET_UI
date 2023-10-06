@@ -1128,7 +1128,7 @@ const Chat = () => {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    height:"650px"
+    height:"620px"
   }}
 >
   {messages?.receiver?.firstName && (
