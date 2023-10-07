@@ -108,11 +108,11 @@ export default function Topbar() {
           ))} */}
        </div> 
 
-       <div className="topbarPosts">
+       {/* <div className="topbarPosts">
           {filteredPosts.map((post) => (
             <Post key={post._id} post={post} />
           ))}
-        </div>
+        </div> */}
 
         {/* <form onSubmit={handleSearch} style={{ display: "flex", alignItems: "center" }}>
           <input name="search" label="Search by Jobs Title" variant="outlined" fullWidth />

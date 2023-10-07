@@ -104,7 +104,7 @@ const JobDetails = () => {
             </IconButton>
           }
           title={jobDetails?.jobTitle}
-          subheader="September 14, 2016"
+          subheader="September 28, 2023"
         />
 
         <CardContent>
