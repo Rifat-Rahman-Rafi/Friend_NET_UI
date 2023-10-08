@@ -6,7 +6,6 @@ import {
   HelpOutline,
   Event
 } from "@mui/icons-material";
-import styled from "styled-components";
 import {AiFillDelete} from 'react-icons/ai'
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -24,18 +23,13 @@ import { Search } from '@mui/icons-material';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import AllUserInfo from "../AllUserInfo/AllUserInfo";
 export default function Sidebar() {
-  //to hide/show certain elements
+  
   const [showHidden,setShowHidden] = useState()
   const logoutToggle =(showHidden)=>{
              setShowHidden(!showHidden);
   }
 
-  //to ask user if they really want to logout
-  // const [logout,setLogout] = useState(false);
-  // console.log(logout)
-  // const confirmLogout =()=>{
-  //  setLogout(window.confirm("Are You Sure, You want to Logout?"))
-  //   } 
+
 
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -64,17 +58,16 @@ export default function Sidebar() {
     const handleClose = () => setOpen(false);
 
     const handleConfirmDelete = () => {
-        // Perform the delete operation here (call deleteone function)
+        
         dispatch({ type: "LOGOUT" })
 
       navigate("/")
       setUser(null)
     
-        // Close the modal
+        
         handleClose();
     
-        // Show a success message using window.alert
-       // window.alert('Item successfully deleted');
+      
       };
 
   
@@ -87,14 +80,6 @@ export default function Sidebar() {
   //     navigate("/")
   //     setUser(null)
   // }
-
-    //for selecting mode and doing its function
-//     const [mode,setMode] = useState('night');
-//     const getSelectedMode =(e)=>{
-//       setMode(e.target.value);
-// }
-
-// console.log(mode)
 
   return (
     <div className="sidebar">
