@@ -30,7 +30,7 @@ export default function Share({changeState}) {
           ) : (
             <Avatar sx={{ bgcolor: 'black', width: 52, height: 52 }}>{text}</Avatar>
              
-            //<div className="dummy">{text}</div>
+            
           )}
             
             <div className="shareInputCont"></div>

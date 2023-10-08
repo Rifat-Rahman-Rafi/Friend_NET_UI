@@ -15,7 +15,6 @@ import Home from "./pages/home/Home";
 import { useDispatch, useSelector } from "react-redux";
 import Auth from "./components/auth/auth";
 import Chat from "./components/Chat/Chat";
-import Dashboard from './modules/Dashboard';
 import Job from "./components/Jobs/Job";
 import FindJobs from "./components/FindJobs/FindJobs";
 import JobDetails from "./components/FindJobs/JobDetails";
