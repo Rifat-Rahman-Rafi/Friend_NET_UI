@@ -31,7 +31,7 @@ export default function Feed({changeState}) {
   console.log("POPOPSOOSOS",posts?.postMessages);
 
 
- console.log("DISPATCH",dispatch(getposts()));
+//  console.log("DISPATCH",dispatch(getposts()));
   
   
 

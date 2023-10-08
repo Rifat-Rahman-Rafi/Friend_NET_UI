@@ -6,6 +6,11 @@ import {
   HelpOutline,
   Event
 } from "@mui/icons-material";
+import styled from "styled-components";
+import {AiFillDelete} from 'react-icons/ai'
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
 import { Users } from "../../dummyData";
 import CloseFriend from "../closeFriend/CloseFriend";
 import ExpandCircleDownRoundedIcon from '@mui/icons-material/ExpandCircleDownRounded';
@@ -39,21 +44,55 @@ export default function Sidebar() {
   const id = user?.result?._id;
   const dispatch = useDispatch();
 
+
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
   
 
-    const logout = () => {
-      window.confirm("Are You Sure, You want to Logout?")
-      dispatch({ type: "LOGOUT" })
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    const handleConfirmDelete = () => {
+        // Perform the delete operation here (call deleteone function)
+        dispatch({ type: "LOGOUT" })
 
       navigate("/")
       setUser(null)
-  }
+    
+        // Close the modal
+        handleClose();
+    
+        // Show a success message using window.alert
+       // window.alert('Item successfully deleted');
+      };
+
+  
+
+  //   const logout = () => {
+      
+  //     window.confirm("Are You Sure, You want to Logout?")
+  //     dispatch({ type: "LOGOUT" })
+
+  //     navigate("/")
+  //     setUser(null)
+  // }
 
     //for selecting mode and doing its function
-    const [mode,setMode] = useState('night');
-    const getSelectedMode =(e)=>{
-      setMode(e.target.value);
-}
+//     const [mode,setMode] = useState('night');
+//     const getSelectedMode =(e)=>{
+//       setMode(e.target.value);
+// }
 
 // console.log(mode)
 
@@ -136,14 +175,40 @@ export default function Sidebar() {
             <ExpandCircleDownRoundedIcon className="sidebarIcon" />
             <span className="sidebarListItemText" >Show more</span>
           </li>
-          <Link style={{textDecoration:'none'}} to={logout?'/':''}>
-          <li><h5 id="logout"  className={showHidden?"logout-show":"logout-hide"} onClick={()=>logout()}>Logout</h5></li></Link>
-          {/* <li>
-            <select id="select-mode" className={showHidden?"mode-show":"mode-hide"} onChange={getSelectedMode} value={mode} style={{background:mode==='day'?'white':'black',color:mode==='night'?'grey':''}}>
-              <option className="day-mode" value='day' >Day</option>
-              <option className="night-mode" value='night'>Night</option>
-            </select>
-          </li> */}
+          {/* <Link style={{textDecoration:'none'}} to={logout?'/':''}>
+          <li><h5 id="logout"  className={showHidden?"logout-show":"logout-hide"} onClick={()=>logout()}>Logout</h5></li>
+          </Link> */}
+
+          <>
+<h4 id="logout" className={showHidden?"logout-show":"logout-hide"} onClick={handleOpen}>Logout</h4>     
+<Modal
+  open={open}
+  onClose={handleClose}
+  aria-labelledby="modal-modal-title"
+  aria-describedby="modal-modal-description"
+>
+<Box sx={style} style={{border:"none",borderRadius:"5px"}}>
+  <Typography style={{textAlign:"center"}} id="modal-modal-title" variant="h6" component="h2">
+          Are You Sure, You want to Logout?
+  </Typography>
+  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <button onClick={handleConfirmDelete} style={{ margin: '0 10px',backgroundColor:"red", color:"white", padding:"10px 15px", border:"none",borderRadius:"5px" }}>
+        Yes LogOut
+      </button>
+      <button onClick={handleClose} style={{ margin: '0 10px',backgroundColor:"gray", color:"white", padding:"10px 15px", border:"none",borderRadius:"5px" }}>
+        Cancel
+      </button>
+    </div>
+  </Typography>
+</Box>
+
+</Modal>
+</>
+
+
+
+
         </ul>
         {/* <button className="sidebarButton">Show More</button> */}
         <hr className="sidebarHr" />
