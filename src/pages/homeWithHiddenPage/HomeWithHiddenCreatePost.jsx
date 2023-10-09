@@ -199,6 +199,9 @@ export default function CreatePost() {
   };
 
 
+
+
+
   const text = user?.result?.name.charAt(0);
 
 
@@ -272,7 +275,8 @@ export default function CreatePost() {
             }
           />
          </div>
-          </label>
+       
+          </label> 
 
 
  
