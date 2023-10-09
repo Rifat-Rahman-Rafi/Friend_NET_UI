@@ -23,16 +23,16 @@ function Profile() {
   const dispatch = useDispatch();
   const { userposts,message } = useSelector((state) => state.posts);
   const { userinfo, userinfomessage } = useSelector((state) => state.userinfo);
-  console.log(userinfomessage, userinfo)
+  // console.log(userinfomessage, userinfo)
   const user = JSON.parse(localStorage.getItem("profile"));
   const { id } = useParams();
 
-  const {alluserinfo} = useSelector((state) => state.userinfo);
+  // const {alluserinfo} = useSelector((state) => state.userinfo);
 
   const [bio, setBio] = useState('');
   const [isEditing, setIsEditing] = useState(false);
 
-  console.log("ALLL USER INFO",alluserinfo)
+  //  console.log("ALLL USER INFO",alluserinfo)
 
 
   const userId = user;
@@ -109,112 +109,24 @@ function Profile() {
   // };
 
 
-
-
-	// const [users, setUsers] = useState([])
-
-  // useEffect(() => {
-	// 	const fetchUsers = async () => {
-	// 		const res = await fetch(`http://localhost:8000/api/users/${user?.id}`, {
-	// 			method: 'GET',
-	// 			headers: {
-	// 				'Content-Type': 'application/json',
-	// 			}
-	// 		});
-	// 		const resData = await res.json()
-	// 		setUsers(resData)
-	// 	}
-	// 	fetchUsers()
-	// }, [])
-
-  // const nid='650c541befd94c45777c2e98';
-  // useEffect(() => {
-	// 	const fetchUsers = async () => {
-	// 		const res = await fetch(`http://localhost:8000/api/users/${nid}`, {
-	// 			method: 'GET',
-	// 			headers: {
-	// 				'Content-Type': 'application/json',
-	// 			}
-	// 		});
-	// 		const resData = await res.json()
-
-  //     console.log("NEW MESSAMNHEG",resData)
-	// 		setUsers(resData)
-	// 	}
-	// 	fetchUsers()
-	// }, [])
   
 
-  const allIds = userinfo?.data?.userInfor.followerId;
+  let allIds = userinfo?.data?.userInfor?.followeeId ;
+  let allIdes2 = userinfo?.data?.userInfor?.followerId;
   
-  const [users, setUsers] = useState([]);
+  allIds = allIds?.concat(allIdes2);
 
-
-  // useEffect(() => {
-  //   if (allIds && allIds.length > 0) {
-  //     // Convert the array of IDs to a comma-separated string
-  //     const userIdsString = allIds.join(',');
-
-  //     //console.log("userIdsString",userIdsString)
-
-  //     // Make a GET request to fetch user data
-  //     fetch(`/getUsersByIds?userIds=${userIdsString}`, {
-  //       method: 'GET',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //     })
-  //       .then((response) => {
-  //         if (!response.ok) {
-  //           throw new Error(`HTTP Error! Status: ${response.status}`);
-  //         }
-  //         return response.json();
-  //       })
-  //       .then((data) => {
-  //         if (data.users) {
-  //           setUsers(data.users);
-  //         } else {
-  //           console.error('No users data found in the response:', data);
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.error('Fetch error:', error);
-  //       });
-  //   }
-  // }, [allIds]);
+  //console.log(allIds,"IIIISSS",allIdes2)
 
  
-  
+  const alluserinfo = useSelector((state) => state.userinfo.alluserinfo);
+
+  useEffect(() => {
+    dispatch(getalluserinfo());
+  }, [dispatch]);
 
 
-
-console.log("UUUSUSUSSHHH",users)
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  console.log("userinfo?.data?.userInfor?.followerId",allIds
-  )
+  console.log("userinfo?.data?.userInfor?.followeeId",allIds)
 
 
   // console.log(userinfo?.data?.userInfor?.creator,"VVALLA")
@@ -376,7 +288,7 @@ console.log("UUUSUSUSSHHH",users)
               >
                 Mutual Friends
               </h4>
-              {Users.filter(function (user) {
+              {/* {Users.filter(function (user) {
                 return user.id > 1 && user.id <= 7;
               }).map(function (user) {
                 return (
@@ -391,7 +303,44 @@ console.log("UUUSUSUSSHHH",users)
                     </span>
                   </div>
                 )
-              })}
+              })} */}
+
+
+  {Array.isArray(alluserinfo?.userInfor) && allIds.length > 0 ? (
+    alluserinfo?.userInfor
+      .filter((userinfo) => allIds.includes(userinfo.creator))
+      .slice(0, 7) // Only show up to 7 friends
+      .map((userinfo) => (
+
+        <div key={userinfo._id} className="mutualFriend" style={{gap:"10px",marginLeft:"12px"}}>
+        <img
+          className="profileMutualFriendImg"
+          src={userinfo?.profileImg}
+          alt=""
+          
+        />
+        <span className="profileMutualFriendName">
+        {userinfo?.name}
+        </span>
+      </div>
+        // <li className='rightbarFriend' key={userinfo._id}>
+        //   <div className="rightbarProfileImageCont">
+        //     <Link to={"/chat"}>
+        //       <img src={userinfo?.profileImg} alt="" className="rightbarProfileImage" />
+        //     </Link>
+        //     <span className="rightbarOnline"></span>
+        //   </div>
+        //   <Link to={'/chat'} className="rightbarUsername">
+        //     <b>{userinfo?.name}</b>
+        //   </Link>
+        // </li>
+      ))
+  ) : (
+    <p>No friends</p>
+  )}
+
+
+
             </div>
           </div>
           <div className="profileBottomRight" style={{marginTop:"60px",marginLeft:"20px",marginRight:"20px"}}>

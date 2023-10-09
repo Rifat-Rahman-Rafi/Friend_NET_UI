@@ -9,7 +9,6 @@ function Rightbar() {
   return (
     <div className="rightbar">
 
-      {/* <Chat></Chat> */}
      
     <div className="rightbarWrapper">
         
