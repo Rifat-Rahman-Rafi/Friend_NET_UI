@@ -19,11 +19,12 @@ const Friends = () => {
     dispatch(getalluserinfo());
   }, [dispatch]);
 
-  function handle() {
-    navigate(`/profile/${alluserinfo?.creator}`);
-  }
 
-  console.log(alluserinfo.creator,"HELLOggggg")
+  const handleViewProfile = (creatorId) => {
+    
+    navigate(`/profile/${creatorId}`); 
+  };
+
   
     return (
         <>
@@ -117,7 +118,7 @@ const Friends = () => {
                   variant="contained"
                   color="primary"
                   fullWidth
-                  onClick={handle}
+                  onClick={() => handleViewProfile(userinfo?.creator)}
                 >
                   View Profile
                 </Button>
