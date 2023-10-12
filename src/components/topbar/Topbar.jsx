@@ -155,7 +155,7 @@ export default function Topbar() {
           </div>
           <div className="topbarIconItem">
           <div className="topbarIconCont">
-          <Link to="/chat"> {/* Add the Link here */}
+          <Link to="/chat"> 
                   <QuestionAnswerIcon style={{ color: "black", borderRadius: '50%', fontSize: '21px' }} />
                 </Link>
             </div>
