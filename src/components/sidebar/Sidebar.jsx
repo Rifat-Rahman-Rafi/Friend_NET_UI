@@ -121,11 +121,13 @@ export default function Sidebar() {
 
 
                 
-        
+        <Link to="/friends" style={{ textDecoration: 'none' }}>
           <li className="sidebarListItem">
             <Group className="sidebarIcon" style={{color:'skyblue'}}/>
             <span className="sidebarListItemText">Friends</span>
           </li>
+
+          </Link>
 
           <Link to="/chat" style={{ textDecoration: 'none' }}>
           <li className="sidebarListItem">
@@ -134,7 +136,7 @@ export default function Sidebar() {
           </li>
 
           </Link>
-          
+
           <Link to="/comingsoon" style={{ textDecoration: 'none' }}>
           <li className="sidebarListItem">
             <VideoLibraryIcon className="sidebarIcon" style={{color:'skyblue'}}/>

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useEffect } from "react";
-import { getalluserinfo } from "../../actions/userinfo";
+import { getalluserinfo, getuserinfo } from "../../actions/userinfo";
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Typography, Card, CardContent, CardMedia, Button, Grid, Container } from '@mui/material';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import './Friends.css'
@@ -19,11 +19,22 @@ const Friends = () => {
     dispatch(getalluserinfo());
   }, [dispatch]);
 
+  const { userinfo, userinfomessage } = useSelector((state) => state?.userinfo);
+
+
+
 
   const handleViewProfile = (creatorId) => {
     
     navigate(`/profile/${creatorId}`); 
   };
+
+  let allIds = userinfo?.data?.userInfor?.followeeId ;
+  let allIdes2 = userinfo?.data?.userInfor?.followerId;
+  
+  allIds = allIds?.concat(allIdes2);
+
+  console.log("SHSJS",allIds)
 
   
     return (
@@ -101,7 +112,40 @@ const Friends = () => {
 <Container style={{justifyContent:"center"}}>
     <h1 style={{textAlign:"center",marginTop:"30px",marginBottom:"50px"}}>ALL Mutual Friends</h1>
   <div className="card-container">
-    {Array.isArray(alluserinfo?.userInfor) &&
+
+  {Array.isArray(alluserinfo?.userInfor) && allIds.length > 0 ? (
+    alluserinfo?.userInfor
+      .filter((userinfo) => allIds.includes(userinfo.creator)).map((userinfo) => (
+
+<div className="card" key={userinfo?._id}>
+          <img style={{width:"100%",height:"260px"}} src={userinfo?.profileImg} className="card-img-top" alt="Profile" />
+          <div className="card-body">
+          <p className="card-text">
+             Bio : {userinfo?.bio}
+            </p>
+            <h3 className="card-text">
+             Name : {userinfo?.name}
+            </h3>
+          </div>
+          <Button
+          style={{marginBottom:"50px"}}
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                  onClick={() => handleViewProfile(userinfo?.creator)}
+                >
+                  View Profile
+                </Button>
+        </div>
+        
+      ))
+  ) : (
+    <p>No friends</p>
+  )}
+
+
+
+    {/* {Array.isArray(alluserinfo?.userInfor) &&
       alluserinfo?.userInfor.map((userinfo) => (
         <div className="card" key={userinfo?._id}>
           <img style={{width:"100%",height:"260px"}} src={userinfo?.profileImg} className="card-img-top" alt="Profile" />
@@ -123,10 +167,51 @@ const Friends = () => {
                   View Profile
                 </Button>
         </div>
-      ))}
+      ))} */}
   </div>
+
+
+  <h1 style={{textAlign:"center",marginTop:"30px",marginBottom:"50px"}}>ALL Mutual Friends</h1>
+  <div className="card-container">
+
+  {Array.isArray(alluserinfo?.userInfor) && allIds.length > 0 ? (
+  alluserinfo?.userInfor
+    .filter((userinfo) => allIds.includes(userinfo.creator))
+    .map((userinfo) => (
+      <div className="card" key={userinfo?._id}>
+        <img style={{ width: "100%", height: "260px" }} src={userinfo?.profileImg} className="card-img-top" alt="Profile" />
+        <div className="card-body">
+          <p className="card-text">Bio: {userinfo?.bio}</p>
+          <h3 className="card-text">Name: {userinfo?.name}</h3>
+        </div>
+        <Button
+          style={{ marginBottom: "50px" }}
+          variant="contained"
+          color="primary"
+          fullWidth
+          onClick={() => handleViewProfile(userinfo?.creator)}
+        >
+          View Profile
+        </Button>
+      </div>
+    ))
+) : (
+  <p>No friends</p>
+)}
+
+
+</div>
+
+
+
+
   </Container>
 </div>
+
+
+
+
+
 
 
 

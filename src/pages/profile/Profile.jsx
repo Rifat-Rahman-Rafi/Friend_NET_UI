@@ -21,9 +21,9 @@ function Profile() {
 
 
   const dispatch = useDispatch();
-  const { userposts,message } = useSelector((state) => state.posts);
-  const { userinfo, userinfomessage } = useSelector((state) => state.userinfo);
-  // console.log(userinfomessage, userinfo)
+  const { userposts,message } = useSelector((state) => state?.posts);
+  const { userinfo, userinfomessage } = useSelector((state) => state?.userinfo);
+  
   const user = JSON.parse(localStorage.getItem("profile"));
   const { id } = useParams();
 
