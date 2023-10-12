@@ -86,51 +86,6 @@ const dispatch = useDispatch();
             ))}
         </div> */}
 
-{/* 
-        <Container>
-
-      <Typography variant="h4" align="center" gutterBottom>
-        All Mutual Friends
-      </Typography>
-      <Grid container spacing={2}>
-        {Array.isArray(alluserinfo?.userInfor) && alluserinfo?.userInfor.map((userinfo) => (
-          <Grid key={userinfo._id} item xs={12} md={4}>
-            <Card>
-            <Container style={{ height: "350px" }}>
-  <CardMedia
-    style={{
-      width: "100%",
-      height: "100%",
-      objectFit: "cover", 
-      marginTop: "20px",
-    }}
-    image={userinfo?.profileImg}
-    title="green iguana"
-  />
-</Container>
-
-              <CardContent>
-                <Typography variant="h5" component="div">
-                  {userinfo?.name}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {userinfo?.bio || 'No bio available'}
-                </Typography>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  fullWidth
-                //   onClick={() => handleBuyNow(userinfo?.name)}
-                >
-                  Buy Now
-                </Button>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-
-      </Container> */}
 
 <Topbar></Topbar>
 <div style={{display:"flex",marginTop:"60px"}}>
