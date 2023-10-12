@@ -126,10 +126,15 @@ export default function Sidebar() {
             <Group className="sidebarIcon" style={{color:'skyblue'}}/>
             <span className="sidebarListItemText">Friends</span>
           </li>
+
+          <Link to="/chat" style={{ textDecoration: 'none' }}>
           <li className="sidebarListItem">
             <Chat className="sidebarIcon" style={{color:'skyblue'}}/>
             <span className="sidebarListItemText">Messenger</span>
           </li>
+
+          </Link>
+          
           <Link to="/comingsoon" style={{ textDecoration: 'none' }}>
           <li className="sidebarListItem">
             <VideoLibraryIcon className="sidebarIcon" style={{color:'skyblue'}}/>
