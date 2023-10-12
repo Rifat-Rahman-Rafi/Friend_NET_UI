@@ -24,6 +24,7 @@ import ComingSoon from "./components/ComingSoon/ComingSoon";
 import AllUserInfo from "./components/AllUserInfo/AllUserInfo";
 import NJobDetail from "./components/JobDetail/NJobDetail";
 import NotFound from "./components/NotFound/NotFound";
+import Friends from "./components/Friends/Friends";
 function App() {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -51,6 +52,10 @@ function App() {
         <Route path="/comingsoon"element={<ComingSoon/>} />
 
         <Route path="/alluser"element={<AllUserInfo/>} />
+
+        <Route path="/friends"element={<Friends></Friends>} />
+
+
         {/* <Route path="/e"element={<NJobDetail></NJobDetail>}/> */}
         <Route path="*" element={<NotFound />} />
 

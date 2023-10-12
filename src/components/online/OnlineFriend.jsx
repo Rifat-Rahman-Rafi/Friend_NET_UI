@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 export default function OnlineFriend() {
   const dispatch = useDispatch();
-  const alluserinfo = useSelector((state) => state.userinfo.alluserinfo);
+  const alluserinfo = useSelector((state) => state?.userinfo?.alluserinfo);
 
   useEffect(() => {
     dispatch(getalluserinfo());
