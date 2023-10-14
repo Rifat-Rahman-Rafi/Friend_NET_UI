@@ -11,36 +11,58 @@ export default function OnlineFriend() {
   useEffect(() => {
     dispatch(getalluserinfo());
   }, [dispatch]);
+
+  const user = JSON.parse(localStorage.getItem("profile"));
+  
+  const myID=user?.result?._id;
   return (
 
-  //   <div>
-  //    {
-  //     Array.isArray(alluserinfo.userInfor) && alluserinfo.userInfor.map((userinfo) => (
-  //   <li className="sidebarFriend">
-  //     <img className="sidebarFriendImg" src={userinfo?.profileImg} alt="" />
-  //     <span className="sidebarFriendName">{userinfo?.name}</span>
-  //   </li>
-  //    ))}
-  //  </div>
-  <div>
+
+  // <div>
     
-      {Array.isArray(alluserinfo?.userInfor) && alluserinfo?.userInfor.map((userinfo) => (
-        <li className='rightbarFriend' key={userinfo._id}>
-          <div className="rightbarProfileImageCont">
+  //     {Array.isArray(alluserinfo?.userInfor) && alluserinfo?.userInfor.map((userinfo) => (
+
+        
+  //       <li className='rightbarFriend' key={userinfo?._id}>
+  //         <div className="rightbarProfileImageCont">
             
 
             
-            <Link to={"/chat"}>
+  //           <Link to={"/chat"}>
+  //             <img src={userinfo?.profileImg} alt="" className="rightbarProfileImage" />
+  //           </Link>
+  //           <span className="rightbarOnline"></span>
+  //         </div>
+        
+  //         <Link to={'/chat'} className="rightbarUsername">
+  //           <b >{userinfo?.name}</b>
+  //         </Link>
+  //       </li>
+  //     ))}
+  //   </div>
+
+<div>
+  {Array.isArray(alluserinfo?.userInfor) &&
+    alluserinfo?.userInfor.map((userinfo) =>
+      userinfo?.creator !== myID ? (
+        <li className="rightbarFriend" key={userinfo?._id}>
+          <div className="rightbarProfileImageCont">
+            <Link to="/chat">
               <img src={userinfo?.profileImg} alt="" className="rightbarProfileImage" />
             </Link>
             <span className="rightbarOnline"></span>
           </div>
-        
-          <Link to={'/chat'} className="rightbarUsername">
-            <b >{userinfo?.name}</b>
+          <Link to="/chat" className="rightbarUsername">
+            <b>{userinfo?.name}</b>
           </Link>
         </li>
-      ))}
-    </div>
+      ) : null
+    )
+  }
+</div>
+
+
+
+  
   )
 }
