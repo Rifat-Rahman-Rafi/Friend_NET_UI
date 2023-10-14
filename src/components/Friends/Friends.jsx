@@ -39,6 +39,11 @@ const dispatch = useDispatch();
 
   allIds= allIds?.concat(user?.result?._id);
 
+  const myID=user?.result?._id;
+
+
+  console.log("user?.result?._id",user?.result?._id)
+
 
 
 
@@ -60,7 +65,7 @@ const dispatch = useDispatch();
     );
   };
 
-  console.log("SHSJS",allIds.length,alluserinfo?.userInfor?.length)
+  //console.log("SHSJS",allIds?.length,alluserinfo?.userInfor?.length)
 
   
     return (
@@ -94,10 +99,10 @@ const dispatch = useDispatch();
     <h1 style={{textAlign:"center",marginTop:"30px",marginBottom:"50px"}}>ALL Mutual Friends</h1>
   <div className="card-container">
 
-  {Array.isArray(alluserinfo?.userInfor) && allIds.length > 0 ? (
+  {Array.isArray(alluserinfo?.userInfor) && allIds?.length > 0 ? (
     alluserinfo?.userInfor
-      .filter((userinfo) => allIds.includes(userinfo.creator)).map((userinfo) => (
-
+    .filter((userinfo) => allIds.includes(userinfo?.creator) && userinfo?.creator !== myID)
+    .map((userinfo) => (
 <div className="card" key={userinfo?._id}>
           <img style={{width:"100%",height:"260px"}} src={userinfo?.profileImg} className="card-img-top" alt="Profile" />
           <div className="card-body">
@@ -152,15 +157,15 @@ const dispatch = useDispatch();
   </div>
 
  {
-    allIds.length!==alluserinfo?.userInfor?.length?
+    allIds?.length!==alluserinfo?.userInfor?.length?
     <h1 style={{textAlign:"center",marginTop:"30px",marginBottom:"50px"}}>Follow Users</h1>:<></>
  }
 
   <div className="card-container">
 
-  {Array.isArray(alluserinfo?.userInfor) && allIds.length > 0 ? (
+  {Array.isArray(alluserinfo?.userInfor) && allIds?.length > 0 ? (
   alluserinfo?.userInfor
-    .filter((userinfo) =>!allIds.includes(userinfo.creator))
+    .filter((userinfo) =>!allIds.includes(userinfo?.creator))
     .map((userinfo) => (
       <div className="card" key={userinfo?._id}>
         <img style={{ width: "100%", height: "260px" }} src={userinfo?.profileImg} className="card-img-top" alt="Profile" />

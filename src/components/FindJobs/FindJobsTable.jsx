@@ -29,12 +29,12 @@ const FindJobsTable = ({ toys }) => {
       </TableCell>
       <TableCell>
         <Typography variant="subtitle1" style={{ fontWeight: "medium", color: "#777",textAlign: "center" }}>
-        {toys.companyName}
+        {toys?.companyName}
         </Typography>
       </TableCell>
       <TableCell align="center">
         <Typography variant="body2" style={{ textAlign: "center" }}>
-          ${toys.salary}
+          ${toys?.salary}
         </Typography>
       </TableCell>
       <TableCell>
