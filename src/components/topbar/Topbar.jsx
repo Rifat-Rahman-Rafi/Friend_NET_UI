@@ -147,12 +147,12 @@ export default function Topbar() {
       </div>
       <div className="topbarRight">
         <div className="topbarIcons">
-          <div className="topbarIconItem">
+          {/* <div className="topbarIconItem">
             <div className="topbarIconCont">
             <Person style={{color:"black",borderRadius:'50%',fontSize:'21px'}} />
             </div>
             <span className="topbarIconBadge">1</span>
-          </div>
+          </div> */}
           <div className="topbarIconItem">
           <div className="topbarIconCont">
           <Link to="/chat"> 
