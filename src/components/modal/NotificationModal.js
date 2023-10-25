@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import IconButton from "@mui/material/IconButton";
-import { AiFillNotification } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { getusernotifications } from "../../actions/userinfo";
 import {  Notifications } from "@mui/icons-material";
@@ -31,7 +29,7 @@ function NotificationModal() {
           <Notifications></Notifications>
           </IconButton>
           <div>
-            {usernotifications?.usernotifications?.notification.length > 0 ? (
+            {usernotifications?.usernotifications?.notification?.length > 0 ? (
               <span className="topbarIconBadge">
                 {usernotifications?.usernotifications?.notification?.length}
               </span>

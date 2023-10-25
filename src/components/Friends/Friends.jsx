@@ -94,7 +94,7 @@ const dispatch = useDispatch();
 
 <Topbar></Topbar>
 <div style={{display:"flex",marginTop:"60px"}}>
-   <div> <Sidebar></Sidebar></div>
+   <div style={{width:"15%"}}> <Sidebar></Sidebar></div>
 <Container style={{justifyContent:"center"}}>
     <h1 style={{textAlign:"center",marginTop:"30px",marginBottom:"50px"}}>ALL Mutual Friends</h1>
   <div className="card-container">
@@ -173,11 +173,14 @@ const dispatch = useDispatch();
           <p className="card-text">Bio: {userinfo?.bio}</p>
           <h3 className="card-text">Name: {userinfo?.name}</h3>
         </div>
-        <Button variant="contained"   type="button" onClick={handleFollow} style={{margin: "5px" ,color:"white",width: "75%"}}>
+        <Button variant="contained"   type="button" onClick={handleFollow} style={{margin: "5px" ,color:"white",width: "100%"}}>
             {userinfo?.data?.userInfor?.followeeId?.includes(user?.result?._id)
               ? "Unfollow"
               : "Follow"}
           </Button>
+
+
+        
       </div>
     ))
 ) : (
