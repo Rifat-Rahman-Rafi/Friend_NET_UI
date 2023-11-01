@@ -10,10 +10,10 @@ const NJobDetail = () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch('http://localhost:5000/posts'); // Replace '/api/posts' with your API endpoint
+          const response = await fetch('http://localhost:5000/posts'); 
           const data = await response.json();
           setPostMessages(data.postMessages);
-          //console.log(data.postMessages)
+         
         } catch (error) {
           console.error('Error fetching data:', error);
         }

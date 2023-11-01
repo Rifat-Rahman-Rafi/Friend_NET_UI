@@ -119,7 +119,7 @@ function Profile() {
   //console.log(allIds,"IIIISSS",allIdes2)
 
  
-  const alluserinfo = useSelector((state) => state.userinfo.alluserinfo);
+  const alluserinfo = useSelector((state) => state.userinfo?.alluserinfo);
 
   useEffect(() => {
     dispatch(getalluserinfo());
@@ -204,7 +204,7 @@ function Profile() {
             <img
               src={
                 isNewCoverSelected
-                  ? postInfo.coverImg
+                  ? postInfo?.coverImg
                   : userinfo?.data?.userInfor?.coverImg
               }
               alt="coverphoto"
