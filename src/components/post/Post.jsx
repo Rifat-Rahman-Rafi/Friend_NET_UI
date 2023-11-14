@@ -1,15 +1,22 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import './post.css'
 import { commentforpost, deletecomment, likepost } from '../../actions/posts';
 import { format } from 'date-fns';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Avatar } from '@mui/material';
 import {Button} from "react-bootstrap"
 import {   InputBase } from '@mui/material';
 import {  Send } from '@mui/icons-material';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import { getalluserinfo } from "../../actions/userinfo";
+
+import { AiFillLike } from "react-icons/ai";
+import { AiOutlineLike } from "react-icons/ai";
 export default function Post({post}) {
 
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -25,8 +32,21 @@ const [isLiked, setIsLiked] = useState(post?.likes?.includes(user?.result?._id))
     navigate(`/profile/${post?.creator}`);
   }
 
+  const LikeProfilehandle = (id) => {
+    navigate(`/profile/${id}`);
+  };
+  
+  const like = () => {
+    dispatch(likepost({ id:post?._id, userId: user?.result?._id, setMessage:post?.setMessage,name:post?.name , creator:post?.creator}));
+  };
+  
+  
+
+  
+
 
   const likeHandler = async () => {
+   
     try {
       if (isLiked) {
         setLikes(likes - 1);
@@ -36,82 +56,19 @@ const [isLiked, setIsLiked] = useState(post?.likes?.includes(user?.result?._id))
 
       setIsLiked(!isLiked);
 
-      await dispatch(likepost({ id: post?._id, userId: user?.result?._id, setMessage: post.setMessage, name: post.name, creator: post.creator }));
+      await dispatch(likepost({ id: post?._id, userId: user?.result?._id, setMessage: post?.setMessage, name: post?.name, creator: post?.creator }));
     } catch (error) {
       console.error(error);
     }
   };
 
-//   
 
-//   const dateStr = formattedDate;
-//   const currentDate = new Date();
-//   const targetDate = new Date(dateStr);
-  
-//   const timeDifferenceMs = currentDate - targetDate;
-
-//   const daysDifference = Math.floor(timeDifferenceMs / (1000 * 60 * 60 * 24));
-
-//    console.log(`${daysDifference} days ago`);
-
-//    const hoursDifference = Math.floor(timeDifferenceMs / (1000 * 60 * 60));
-// const minutesDifference = Math.floor(timeDifferenceMs / (1000 * 60));
-// const secondsDifference = Math.floor(timeDifferenceMs / 1000);
-
-// let timeAgo = '';
-
-// if (daysDifference > 0) {
-//   timeAgo = `${daysDifference} day${daysDifference === 1 ? '' : 's'} ago`;
-// } else if (hoursDifference > 0) {
-//   timeAgo = `${hoursDifference} hour${hoursDifference === 1 ? '' : 's'} ago`;
-// } else const ate =  new Date(post.createdAt)
-
-//   const postDate = new Date(post.createdAt);
-// postDate.setHours(postDate.getHours() +12);
-
-//   const formattedDate = format(new Date(postDate), 'yyyy-MM-dd HH:mm:ss');if (minutesDifference > 0) {
-//   timeAgo = `${minutesDifference} minute${minutesDifference === 1 ? '' : 's'} ago`;
-// } else {
-//   timeAgo = `${secondsDifference} second${secondsDifference === 1 ? '' : 's'} ago`;
-// }
-
-// Get the current UTC time
-// const currentUtcTime = new Date();
-
-// Calculate the time in Bangladesh by adding the UTC offset
-// const utcOffset = 12 * 60 * 60 * 1000; // 6 hours in milliseconds
-// const currentBangladeshTime = new Date(currentUtcTime.getTime() + utcOffset);
-
-// Format the current Bangladesh time as a string (you can adjust the format as needed)
-// const formattedTime = currentBangladeshTime.toLocaleTimeString('en-US', {
-//   hour12: true,
-//   hour: 'numeric',
-//   minute: 'numeric',
-//   second: 'numeric',
-// });
-
-// console.log('Current time in Bangladesh:', formattedTime);
+  const handleLikeClick = () => {
 
 
-//  console.log(formattedTime);
-
-// console.log("POST.CREA NEWWW",post.createdAt);
-
-     
-
-
-  
-
-  //console.log(post);
-
-  // useEffect(()=>{
-  //   const fetchUser = async()=>{
-  //     const res = await axios.get(`users/${post.userId}`)
-  //     setUser(res.data)
-  //   }
-  //   fetchUser();
-  // },[post.userId]);
-
+    likeHandler();
+    like();
+  };
 
   const text = post?.name?.charAt(0);
 
@@ -131,6 +88,10 @@ const [isLiked, setIsLiked] = useState(post?.likes?.includes(user?.result?._id))
 
   const test = JSON.parse(localStorage.getItem("profile"));
   const _id = test?.result?._id;
+
+
+  // const ate =  new Date(createdAt);
+  const ate = new Date();
 
 
   // console.log("TEST",test);
@@ -204,7 +165,101 @@ const [isLiked, setIsLiked] = useState(post?.likes?.includes(user?.result?._id))
   const relativeTime = formatRelativeTime(new Date(timestamp));
   
   console.log(relativeTime); 
+
+
+
+  console.log("NNNNNNNNEE",timestamp);
+
+
   
+  console.log("LIKE  NNNNE ",post?.likes)
+
+
+  const dateString = timestamp; // Your input date string
+
+// Create a Date object from the input string
+const date = new Date(dateString);
+
+// Define the days of the week and months as arrays
+const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+// Extract the day, month, and year components from the Date object
+const dayOfWeek = daysOfWeek[date.getUTCDay()];
+const month = months[date.getUTCMonth()];
+const day = date.getUTCDate();
+const year = date.getUTCFullYear();
+
+// Create the formatted string
+const formattedDate = `${dayOfWeek} ${month} ${day} ${year}`;
+
+// Print the formatted date
+// console.log(formattedDate);
+
+const options = [post?.likes];
+
+// console.log("options",options)
+
+const ITEM_HEIGHT = 40;
+
+const [anchorEl, setAnchorEl] = useState(null);
+const open = Boolean(anchorEl);
+const handleClick = (event) => {
+  setAnchorEl(event.currentTarget);
+};
+const handleClose = () => {
+  setAnchorEl(null);
+};
+
+
+const alluserinfo = useSelector((state) => state?.userinfo?.alluserinfo);
+  
+useEffect(() => {
+  dispatch(getalluserinfo());
+}, [dispatch]);
+
+const { userinfo, userinfomessage } = useSelector((state) => state?.userinfo);
+
+
+let allIds = userinfo?.data?.userInfor?.followeeId ;
+let allIdes2 = userinfo?.data?.userInfor?.followerId;
+
+allIds = allIds?.concat(allIdes2);
+
+allIds= allIds?.concat(user?.result?._id);
+// console.log(alluserinfo.userInfor)
+
+//const second = [alluserinfo.userInfor];
+// console.log(options)
+// console.log(second)
+const firstArray =[post?.likes];
+const secondArray=[alluserinfo?.userInfor];
+// console.log("SS",secondArray)
+
+// secondArray[0]?.forEach((data) => {
+//   console.log("ppppppppppppppppp",data?.name);
+// });
+
+// secondArray[0]?.forEach((secondData) => {
+  
+//   firstArray[0]?.forEach((firstCreator) => {
+    
+//     if (firstCreator === secondData.creator) {
+//       console.log(`Show the name for creator  ${secondData?.name}`);
+//     }
+//   });
+// });
+
+
+const matchingNames = [];
+secondArray[0]?.forEach((secondData) => {
+  firstArray[0]?.forEach((firstCreator) => {
+    if (firstCreator === secondData?.creator) {
+      matchingNames.push({profileImg: secondData?.profileImg,name: secondData?.name,creator: secondData?.creator })
+    }
+  });
+});
+
 
  
   return (
@@ -225,7 +280,10 @@ const [isLiked, setIsLiked] = useState(post?.likes?.includes(user?.result?._id))
           )}
         <span onClick={handle} className="postUsername">{post?.name}</span>
 
-        <span  className="postDate">{relativeTime}</span>
+        {/* <span  className="postDate">{relativeTime}</span> */}
+        <span  className="postDate" style={{textAlign:"center"}}>{formattedDate}</span>
+        
+        {/* <span style={{marginRight:"15px"}}>{ate.toDateString()}</span> */}
       </div>
       
 
@@ -250,18 +308,97 @@ const [isLiked, setIsLiked] = useState(post?.likes?.includes(user?.result?._id))
   <div className="postBottomLeft">
         <div style={{ display: 'flex' }}>
           <div className="likeIconCont">
-            <img className='likeIcon' onClick={likeHandler} src="../assets/like.png" alt="Like" />
-          </div>
-          <div className="likeIconCont">
-            <img className='likeIcon' onClick={likeHandler} src="../assets/heart.png" alt="Heart" />
+            <img className='likeIcon' onClick={handleLikeClick} src="../assets/like.png" alt="Like" />
           </div>
         </div>
-
-        {isLiked ? (
+       
+        {/* {isLiked ? (
           <span>{likes === 1 ? "You" : ` You and ${likes - 1} other`}</span>
         ) : (
           <span>{likes} likes</span>
-        )}
+        )} */}
+
+<div>
+  <span
+    aria-controls={open ? 'long-menu' : undefined}
+    aria-expanded={open ? 'true' : undefined}
+    aria-haspopup="true"
+    onClick={handleClick}
+  >
+    {isLiked ? (
+      <span>{likes === 1 ? 'You' : ` You and ${likes - 1} other`}</span>
+    ) : (
+      <span>{likes} likes</span>
+    )}
+
+{/* {post?.likes?.includes(user?.result?._id) ? (
+            <>
+              {/* <AiFillLike className="reaction-icon" onClick={like} /> */}
+              {/* <span>{(post?.likes?.length == 1) ? "You" :` You and ${post?.likes?.length - 1} other`}</span>
+            </>
+          ) : (
+            // <div onClick={like} classNem="div">
+              // {/* <AiOutlineLike className="reaction-icon"/> */}
+              {/* <span>{post?.likes?.length} likes</span>
+            // </div> */}
+          {/* )} */} 
+  </span>
+
+  {matchingNames.length > 0 && (
+    <Menu
+      id="long-menu"
+      MenuListProps={{
+        'aria-labelledby': 'long-button',
+      }}
+      anchorEl={anchorEl}
+      open={open}
+      onClose={handleClose}
+ 
+       
+     
+    >
+      {matchingNames?.map((option) => (
+        <MenuItem key={option?.creator} selected={option} onClick={handleClose}>
+           
+           
+            <Avatar
+            onClick={() => LikeProfilehandle(option?.creator)}
+         
+          alt="Travis Howard"
+          src={option.profileImg || 'https://i.ibb.co/Km16CJH/581-5813504-avatar-dummy-png-transparent-png.png'}
+          style={{marginRight:"5px"}}
+        />
+           
+           
+              {option?.name}
+           
+          
+        </MenuItem>
+      ))}
+    </Menu>
+  )}
+</div>
+
+
+
+
+
+{/* <div className="likes">
+          {post?.likes?.includes(user?.result?._id) ? (
+            <>
+              {/* <AiFillLike className="reaction-icon" onClick={like} /> */}
+              {/* <span>{(post?.likes?.length == 1) ? "You" :` You and ${post?.likes?.length - 1} other`}</span>
+            </>
+          ) : (
+            <div onClick={like} classNem="div">
+              {/* <AiOutlineLike className="reaction-icon"/> */}
+              {/* <span>{post?.likes?.length} likes</span>
+            </div>
+          )}
+        </div> */} 
+
+
+
       </div>
       <div className="postBottomRight">
       {newarr?.length > 0 ? (
@@ -273,9 +410,10 @@ const [isLiked, setIsLiked] = useState(post?.likes?.includes(user?.result?._id))
 </span>}
       </div>
 
-   
 
       </div>
+
+
       
 
       {show && (
@@ -286,7 +424,7 @@ const [isLiked, setIsLiked] = useState(post?.likes?.includes(user?.result?._id))
   <div key={i} className="comment-item" style={{marginLeft:"10px"}}>
     <span className="comment-user">{val[0]}:</span>
     <span className="comment-text">{val[1]}</span>
-    <Button onClick={commentDelete}>DELETE</Button>
+    {/* <Button onClick={commentDelete}>DELETE</Button> */}
   </div>
 ))}
 

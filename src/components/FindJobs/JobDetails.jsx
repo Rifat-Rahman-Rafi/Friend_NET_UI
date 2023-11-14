@@ -58,6 +58,30 @@ const JobDetails = () => {
   function handleBack() {
     navigate(`/findjobs`);
   }
+
+
+  const text2 = jobDetails?.apply;
+
+// Regular expression to match email addresses
+const emailRegex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g;
+
+// Find all matches in the text
+const matches = text2?.match(emailRegex);
+
+const [checkEmail, setCheckEmail] = useState([]);
+
+useEffect(() => {
+  if (matches) {
+    setCheckEmail(matches[0]);
+  } else {
+    setCheckEmail(jobDetails?.email);
+  }
+}, [matches, jobDetails]);
+
+console.log("jobDetails", checkEmail);
+
+const mailtoLink = `mailto:${checkEmail}`;
+
     return (
 
 
@@ -149,7 +173,19 @@ const JobDetails = () => {
           <Typography paragraph>
             How To Apply: {jobDetails?.apply}
           </Typography>
+
+          <Typography paragraph>
+          <a href={mailtoLink}>
+          Apply Now
+    </a>
+          </Typography>
         </CardContent>
+        {/* <a href="mailto:srslimited@ai.com?subject=Application%20for%20Frontend%20Developer%20Post">
+  Click here to email us
+</a> */}
+
+
+
 
         <Box display="flex" justifyContent="center">
           <Button

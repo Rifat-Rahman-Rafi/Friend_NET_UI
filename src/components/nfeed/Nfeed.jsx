@@ -85,6 +85,7 @@ const Nfeed = ({
     dispatch(updatepost({ title, postid: _id, updateImg: updateImg.selectedFile }));
     setShowmessage((e) => !e);
     setTitle("");
+
     // Reset the updateImg state if needed
     setUpdateImg("");
   };
@@ -159,17 +160,20 @@ const Nfeed = ({
         <UserNameAndTimePosted style={{width: "100%",display: "flex", justifyContent: "space-between", alignItems: "center"}}>
           <h3 >{name}</h3>
         <>
-        <span style={{marginRight:"15px"}}>{ate.toDateString()}</span>
+        <span style={{marginRight:"20px"}}>{ate.toDateString()} </span>
       {creator === user?.result?._id &&
       
-      <><AiFillEdit onClick={showmessageFunc} />
-       {/* <AiFillDelete onClick={deleteone} /> */}
+      <>
+      <AiFillEdit style={{marginLeft:"90px"}} onClick={showmessageFunc} />
+       
        </>}
         </>
 
 {creator === user?.result?._id &&
 <>
-<AiFillDelete style={{margin:"10px"}} onClick={handleOpen} />     
+{/* <AiFillEdit  onClick={showmessageFunc} /> */}
+
+<AiFillDelete style={{marginRight:"50px"}} onClick={handleOpen} />     
 <Modal
   open={open}
   onClose={handleClose}
@@ -277,9 +281,9 @@ const Nfeed = ({
           <div className="likeIconCont">
             <img className='likeIcon' onClick={likeHandler} src="../assets/like.png" alt="Like" />
           </div>
-          <div className="likeIconCont">
+          {/* <div className="likeIconCont">
             <img className='likeIcon' onClick={likeHandler} src="../assets/heart.png" alt="Heart" />
-          </div>
+          </div> */}
         </div>
 
         {isLiked ? (

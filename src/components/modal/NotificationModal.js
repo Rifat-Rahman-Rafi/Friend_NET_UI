@@ -12,10 +12,14 @@ function NotificationModal() {
   const userId = JSON.parse(localStorage?.getItem("profile"));
   const id = userId?.result?._id;
 
+  dispatch(getusernotifications(id));
+
   const handleOpen = () => {
-    dispatch(getusernotifications(id));
+    
     setOpen(true);
   };
+
+
 
   const handleClose = () => {
     setOpen(false);
@@ -25,16 +29,21 @@ function NotificationModal() {
     <>
       {userId?.result?._id && (
         <div className="topbarIconItem">
+
+          
           <IconButton onClick={handleOpen} style={{ color: "black" }}>
           <Notifications></Notifications>
           </IconButton>
           <div>
-            {usernotifications?.usernotifications?.notification?.length > 0 ? (
-              <span className="topbarIconBadge">
-                {usernotifications?.usernotifications?.notification?.length}
-              </span>
-            ) : null}
-          </div>
+  {usernotifications?.usernotifications?.notification?.length > 0 ? (
+    <span className="topbarIconBadge">
+      {usernotifications?.usernotifications?.notification?.length > 5
+        ? usernotifications?.usernotifications?.notification?.slice(-5).length
+        : usernotifications?.usernotifications?.notification?.length}
+    </span>
+  ) : null}
+</div>
+
         </div>
       )}
       {/* <Dialog open={open} onClose={handleClose} >

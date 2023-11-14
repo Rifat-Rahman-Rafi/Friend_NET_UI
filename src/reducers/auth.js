@@ -1,5 +1,7 @@
 
 
+
+
 const auth = (state = { authData: [] }, action) => {
     switch (action.type) {
         case "AUTH":

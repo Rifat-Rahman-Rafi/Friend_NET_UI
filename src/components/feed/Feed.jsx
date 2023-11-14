@@ -9,7 +9,7 @@ import axios from "axios";
 export default function Feed({changeState}) {
 
 
-  const { posts, postDetails, loading } = useSelector((state) => state.posts);
+  const { posts, postDetails, loading } = useSelector((state) => state?.posts);
   const [messagee, setMessage] = useState("");
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -27,8 +27,28 @@ export default function Feed({changeState}) {
     dispatch(getposts());
 }, [dispatch,postDetails]);
 
+const { userinfo, userinfomessage } = useSelector((state) => state?.userinfo);
+
+let allIds = userinfo?.data?.userInfor?.followeeId ;
+let allIdes2 = userinfo?.data?.userInfor?.followerId;
+
+allIds = allIds?.concat(allIdes2);
+
+allIds= allIds?.concat(user?.result?._id);
+
+const myID=user?.result?._id;
+
+
+console.log("user?.result?._id_HOME PAGE",user?.result?._id)
+
+console.log("flower",allIds)
+
 
   console.log("POPOPSOOSOS",posts?.postMessages);
+
+  // posts?.postMessages.forEach(item => {
+  //   console.log(item.creator);
+  // });
 
 
 //  console.log("DISPATCH",dispatch(getposts()));
@@ -46,10 +66,20 @@ export default function Feed({changeState}) {
       <div className="feedWrapper">
       <Share  changeState={changeState}/>
 
-
+{/* 
             {posts?.postMessages?.map((p)=>(
                <Post key={p._id} post={p} setMessage={setMessage}/>
-      ))}
+      ))} */}
+
+{posts?.postMessages?.map((p) => {
+  if (allIds?.includes(p?.creator)) {
+    return (
+      <Post key={p._id} post={p} setMessage={setMessage} />
+    );
+  } else {
+    return null; // or any other action you want to take for non-matching posts
+  }
+})}
 
      
       {/* {Posts.map((p)=>(

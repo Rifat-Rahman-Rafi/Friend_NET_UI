@@ -6,7 +6,7 @@ import { getalluserinfo } from "../../actions/userinfo";
 export default function CloseFriend( ) {
 
   const dispatch = useDispatch();
-  const alluserinfo = useSelector((state) => state.userinfo.alluserinfo);
+  const alluserinfo = useSelector((state) => state.userinfo?.alluserinfo);
 
   useEffect(() => {
     dispatch(getalluserinfo());
@@ -17,7 +17,7 @@ export default function CloseFriend( ) {
   return (
    <div>
      {
-      Array.isArray(alluserinfo.userInfor) && alluserinfo.userInfor.map((userinfo) => (
+      Array.isArray(alluserinfo?.userInfor) && alluserinfo?.userInfor.map((userinfo) => (
     <li className="sidebarFriend">
       <img className="sidebarFriendImg" src={userinfo?.profileImg} alt="" />
       <span className="sidebarFriendName">{userinfo?.name}</span>

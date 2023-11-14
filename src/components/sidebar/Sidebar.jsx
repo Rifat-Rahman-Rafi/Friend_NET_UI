@@ -58,6 +58,8 @@ export default function Sidebar() {
     const handleClose = () => setOpen(false);
 
     const handleConfirmDelete = () => {
+
+      localStorage.clear();
         
         dispatch({ type: "LOGOUT" })
 
@@ -144,13 +146,13 @@ export default function Sidebar() {
           </li>
           </Link>
 
-          <Link to="/comingsoon" style={{ textDecoration: 'none' }}>
+          {/* <Link to="/comingsoon" style={{ textDecoration: 'none' }}>
           <li className="sidebarListItem">
             <StorefrontIcon className="sidebarIcon" style={{color:'skyblue'}}/>
             <span className="sidebarListItemText">Marketplace</span>
           </li>
-          </Link>
-          <Link to="/comingsoon" style={{ textDecoration: 'none' }}>
+          </Link> */}
+          {/* <Link to="/comingsoon" style={{ textDecoration: 'none' }}>
           <li className="sidebarListItem">
             <HelpOutline className="sidebarIcon" style={{color:'skyblue'}}/>
             <span className="sidebarListItemText">Questions</span>
@@ -162,7 +164,7 @@ export default function Sidebar() {
             <Event className="sidebarIcon" style={{color:'skyblue'}}/>
             <span className="sidebarListItemText">Events</span>
           </li>
-          </Link>
+          </Link> */}
           <li className="sidebarListItem" onClick={()=>logoutToggle(showHidden)}>
             <ExpandCircleDownRoundedIcon className="sidebarIcon" />
             <span className="sidebarListItemText" >Show more</span>
@@ -171,32 +173,28 @@ export default function Sidebar() {
           <li><h5 id="logout"  className={showHidden?"logout-show":"logout-hide"} onClick={()=>logout()}>Logout</h5></li>
           </Link> */}
 
-          <>
-<h4 id="logout" className={showHidden?"logout-show":"logout-hide"} onClick={handleOpen}>Logout</h4>     
-<Modal
-  open={open}
-  onClose={handleClose}
-  aria-labelledby="modal-modal-title"
-  aria-describedby="modal-modal-description"
->
-<Box sx={style} style={{border:"none",borderRadius:"5px"}}>
-  <Typography style={{textAlign:"center"}} id="modal-modal-title" variant="h6" component="h2">
-          Are You Sure, You want to Logout?
-  </Typography>
-  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <button onClick={handleConfirmDelete} style={{ margin: '0 10px',backgroundColor:"red", color:"white", padding:"10px 15px", border:"none",borderRadius:"5px" }}>
-        Yes LogOut
-      </button>
-      <button onClick={handleClose} style={{ margin: '0 10px',backgroundColor:"gray", color:"white", padding:"10px 15px", border:"none",borderRadius:"5px" }}>
-        Cancel
-      </button>
-    </div>
-  </Typography>
-</Box>
+          <div >
+{/* <h4 id="logout" className={showHidden?"logout-show":"logout-hide"} onClick={handleOpen}>Logout</h4>      */}
+<Link className={showHidden?"logout-show":"logout-hide"} to="/comingsoon" style={{ textDecoration: 'none' }}>
+          <li className="sidebarListItem">
+            <StorefrontIcon className="sidebarIcon" style={{color:'skyblue'}}/>
+            <span className="sidebarListItemText">Marketplace</span>
+          </li>
+          </Link>
+<Link className={showHidden?"logout-show":"logout-hide"} to="/comingsoon" style={{ textDecoration: 'none' }}>
+          <li className="sidebarListItem">
+            <HelpOutline className="sidebarIcon" style={{color:'skyblue'}}/>
+            <span className="sidebarListItemText">Questions</span>
+          </li>
+          </Link>
 
-</Modal>
-</>
+          <Link className={showHidden?"logout-show":"logout-hide"} to="/comingsoon" style={{ textDecoration: 'none' }}>
+          <li className="sidebarListItem">
+            <Event className="sidebarIcon" style={{color:'skyblue'}}/>
+            <span className="sidebarListItemText">Events</span>
+          </li>
+          </Link>
+</div>
 
 
 

@@ -22,14 +22,14 @@ const dispatch = useDispatch();
   const { userinfo, userinfomessage } = useSelector((state) => state?.userinfo);
 
 
-
+  const user = JSON.parse(localStorage.getItem("profile"));
 
   const handleViewProfile = (creatorId) => {
     
     navigate(`/profile/${creatorId}`); 
   };
 
-  const user = JSON.parse(localStorage.getItem("profile"));
+  
   const { id } = useParams();
 
   let allIds = userinfo?.data?.userInfor?.followeeId ;
@@ -42,20 +42,13 @@ const dispatch = useDispatch();
   const myID=user?.result?._id;
 
 
-  console.log("user?.result?._id",user?.result?._id)
+  //console.log("user?.result?._id",user?.result?._id)
 
 
 
-
-
-
-
-
-
-
-  const handleFollow = () => {
+  const handleFollow = (creatorId) => {
+    navigate(`/profile/${creatorId}`); 
     dispatch(
-
       getfollowers({
         follower: user?.result?._id,
         followee: id,
@@ -65,7 +58,7 @@ const dispatch = useDispatch();
     );
   };
 
-  //console.log("SHSJS",allIds?.length,alluserinfo?.userInfor?.length)
+  console.log("SHSJS",allIds?.length,alluserinfo?.userInfor?.length)
 
   
     return (
@@ -96,7 +89,11 @@ const dispatch = useDispatch();
 <div style={{display:"flex",marginTop:"60px"}}>
    <div style={{width:"15%"}}> <Sidebar></Sidebar></div>
 <Container style={{justifyContent:"center"}}>
-    <h1 style={{textAlign:"center",marginTop:"30px",marginBottom:"50px"}}>ALL Mutual Friends</h1>
+{
+    allIds?.length!="1"?
+    <h1 style={{textAlign:"center",marginTop:"30px",marginBottom:"50px"}}>ALL Mutual Friends</h1>:<></>
+ }
+   
   <div className="card-container">
 
   {Array.isArray(alluserinfo?.userInfor) && allIds?.length > 0 ? (
@@ -157,11 +154,12 @@ const dispatch = useDispatch();
   </div>
 
  {
-    allIds?.length!==alluserinfo?.userInfor?.length?
+    allIds?.length<=alluserinfo?.userInfor?.length?
     <h1 style={{textAlign:"center",marginTop:"30px",marginBottom:"50px"}}>Follow Users</h1>:<></>
  }
 
   <div className="card-container">
+
 
   {Array.isArray(alluserinfo?.userInfor) && allIds?.length > 0 ? (
   alluserinfo?.userInfor
@@ -173,10 +171,10 @@ const dispatch = useDispatch();
           <p className="card-text">Bio: {userinfo?.bio}</p>
           <h3 className="card-text">Name: {userinfo?.name}</h3>
         </div>
-        <Button variant="contained"   type="button" onClick={handleFollow} style={{margin: "5px" ,color:"white",width: "100%"}}>
+        <Button variant="contained"  type="button"  onClick={() => handleViewProfile(userinfo?.creator)} style={{margin: "5px" ,color:"white",width: "100%"}}>
             {userinfo?.data?.userInfor?.followeeId?.includes(user?.result?._id)
               ? "Unfollow"
-              : "Follow"}
+              : "VIEW PROFILE"}
           </Button>
 
 

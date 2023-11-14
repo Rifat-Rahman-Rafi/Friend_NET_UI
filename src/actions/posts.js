@@ -25,6 +25,7 @@ export const getsearch = (searchText) => async (dispatch) => {
 
         console.log("GET getsearch ACTION",data);
     } catch (error) {
+        
         console.log(error);
     }
 }

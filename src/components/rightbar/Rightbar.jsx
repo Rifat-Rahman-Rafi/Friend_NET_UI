@@ -12,12 +12,7 @@ function Rightbar() {
      
     <div className="rightbarWrapper">
         
-      <div className="birthdayContainer">
-        <img src="./assets/gift.png" alt="" className="birthdayImage" />
-        <span className="birthdayText">
-          <b>Gopal Patel</b> and <b>other friends</b> have a birthday today.
-        </span>
-      </div>
+
       <img src="./assets/ad1.png" alt="" className="rightbarAdImg" />
  
      <hr className="rightbarHr" />
@@ -34,6 +29,8 @@ function Rightbar() {
           ))} */}
 
           <OnlineFriend></OnlineFriend>
+
+          
       </ul>
     </div>
   </div>

@@ -94,7 +94,7 @@
   .loginBtn {
     width: 100%;
     border-radius: 10px;
-    background-color: #1877f2;
+    background-color: #2eb3fe;
   }
   
   .signIn {
@@ -112,7 +112,7 @@
   .button {
     padding: 10px;
     text-align: center;
-    background-color: blue;
+    background-color: #25a4ed;
     color: white;
     border: none;
     cursor: pointer;

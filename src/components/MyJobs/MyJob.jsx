@@ -99,13 +99,21 @@ const MyJob = () => {
         setLoading(false);
       });
   };
+
+
+
+
+
+
+
+
     return (
 
    
         <div className="lg:mx-12 my-10">
             
             <Topbar></Topbar>
-            <Grid container style={{marginTop:"60px"}}>
+    <Grid container style={{marginTop:"60px"}}>
   <Grid xs={2}>
     <Sidebar></Sidebar>
   </Grid>
@@ -142,7 +150,14 @@ const MyJob = () => {
         <CircularProgress color="primary" />
       </TableCell>
     </TableRow>
-  ) : (
+  ) :toys.length === 0 ? (
+    <TableRow>
+      <TableCell align="center" colSpan={7}>
+      You haven't posted any jobs yet.
+      </TableCell>
+    </TableRow>
+  ) : 
+   (
     toys.map((toys, index) => (
       <MyJobTable
         key={toys._id}

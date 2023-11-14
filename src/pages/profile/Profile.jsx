@@ -4,7 +4,7 @@ import Feed from "../../components/feed/Feed";
 import Topbar from "../../components/topbar/Topbar";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import { Users } from "../../dummyData";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Spinnerr from "../../components/Spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { getfollowers, getuserinfo, updateuserinfo } from "../../actions/userinfo";
@@ -44,6 +44,7 @@ function Profile() {
     }
     dispatch(getUserpost(id));
   }, [dispatch, message, userinfomessage, id]);
+  
   const text = userinfo?.data?.userInfor?.name?.charAt(0);
 
   const handleFollow = () => {
@@ -114,7 +115,13 @@ function Profile() {
   let allIds = userinfo?.data?.userInfor?.followeeId ;
   let allIdes2 = userinfo?.data?.userInfor?.followerId;
   
-  allIds = allIds?.concat(allIdes2);
+  allIds = (allIds|| [])?.concat(allIdes2 || []);
+
+
+// Remove duplicates to get unique values
+let uniqueIds = Array.from(new Set(allIds));
+
+console.log("UUnn",uniqueIds);
 
   //console.log(allIds,"IIIISSS",allIdes2)
 
@@ -127,6 +134,15 @@ function Profile() {
 
 
   console.log("userinfo?.data?.userInfor?.followeeId",allIds)
+ 
+
+  const navigate = useNavigate();
+
+  console.log("USER",alluserinfo?.userInfor?.creator);
+
+  function handle(creator) {
+    navigate(`/profile/${creator}`);
+  }
 
 
   // console.log(userinfo?.data?.userInfor?.creator,"VVALLA")
@@ -155,10 +171,21 @@ function Profile() {
     <div className="profile">
 
       
-
+   
       <div className="fbIcon">
         <Link  to="/home" style={{textDecoration:'none'}}>
-        <img height='60px' src={"../assets/icon.png"} alt="" />
+        {/* <img height='60px' src={"../assets/icon.png"} alt="" /> */}
+
+        <img
+      height='55px'
+      width='80px'
+      style={{ borderRadius: '10%',marginLeft:"5px" }} // Add this line for border radius
+      // src="https://i.ibb.co/nrFtYWN/2.jpg"
+     // src="https://i.ibb.co/dmnmtgc/121.png"
+      //src="https://i.ibb.co/wczK67C/2-removebg-preview.png"
+      src="https://i.ibb.co/WgSP3TZ/2-removebg-preview.png"
+      alt=""
+    />
         </Link>
       </div>
       <div className="profileContainer">
@@ -166,39 +193,39 @@ function Profile() {
           <div className="profileCenterTop">
          
 
-{id === userId.result?._id && (
+{/* {id === userId.result?._id && (
 
-       <button onChange={handleCover}  className="editCoverPhotoBtn">
+      //  <button onChange={handleCover}  className="editCoverPhotoBtn">
              
-              <div>
-            <label
-              className="inputLabel"
-              style={{
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
+      //         <div>
+      //       <label
+      //         className="inputLabel"
+      //         style={{
+      //           cursor: "pointer",
+      //           display: "flex",
+      //           alignItems: "center",
+      //         }}
+      //       >
              
-             <CameraAltIcon />
-              <b>Edit <span className="editPicText">Cover Photo</span></b>
-              <div style={{ display: "none" }}>
-              <FileBase
-                  type="file"
-                  multiple={false}
-                  onDone={({ base64 }) => handleCoverPhotoChange(base64)}
+      //        <CameraAltIcon />
+      //         <b>Edit <span className="editPicText">Cover Photo</span></b>
+      //         <div style={{ display: "none" }}>
+      //         <FileBase
+      //             type="file"
+      //             multiple={false}
+      //             onDone={({ base64 }) => handleCoverPhotoChange(base64)}
                   
-                />
+      //           />
                
                 
-              </div>
-            </label>
-          </div>
+      //         </div>
+      //       </label>
+      //     </div>
 
          
-            </button> 
+      //       </button> 
  
-      )}
+      )} */}
      
           
             <img
@@ -209,6 +236,7 @@ function Profile() {
               }
               alt="coverphoto"
               className="coverPhoto"
+              
             />
           </div>
           <div className="profileCenterDown">
@@ -226,7 +254,12 @@ function Profile() {
               <h4 className="profileUsername">
                 {userinfo?.data?.userInfor?.name}{" "}
                 <p style={{ fontSize: "16px", margin: "0", opacity: "0.5" }}>
-                {userinfo?.data?.userInfor?.followeeId.length + userinfo?.data?.userInfor?.followerId.length} friends
+                {/* {userinfo?.data?.userInfor?.followeeId.length + userinfo?.data?.userInfor?.followerId.length} friends */}
+
+                {uniqueIds?.length }
+
+                 friends
+
 
                 </p>
               </h4>
@@ -306,7 +339,7 @@ function Profile() {
               })} */}
 
 
-  {Array.isArray(alluserinfo?.userInfor) && allIds.length > 0 ? (
+  {Array.isArray(alluserinfo?.userInfor) && allIds?.length > 0 ? (
     alluserinfo?.userInfor
       .filter((userinfo) => allIds.includes(userinfo.creator))
       .slice(0, 7) // Only show up to 7 friends
@@ -314,13 +347,18 @@ function Profile() {
 
         <div key={userinfo._id} className="mutualFriend" style={{gap:"10px",marginLeft:"12px"}}>
         <img
+        onClick={() => handle(userinfo?.creator)}
+
           className="profileMutualFriendImg"
           src={userinfo?.profileImg}
           alt=""
           
         />
-        <span className="profileMutualFriendName">
+        <span onClick={() => handle(userinfo?.creator)} className="profileMutualFriendName">
+        
         {userinfo?.name}
+        
+      
         </span>
       </div>
         // <li className='rightbarFriend' key={userinfo._id}>
